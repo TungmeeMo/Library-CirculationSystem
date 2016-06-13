@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="szu.library.cs.dao.BookMapper" >
+  <resultMap id="BaseResultMap" type="szu.library.cs.pojo.Book" >
+    <id column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="author_name" property="authorName" jdbcType="VARCHAR" />
+    <result column="publishing_house" property="publishingHouse" jdbcType="VARCHAR" />
+    <result column="Publishing_date" property="publishingDate" jdbcType="TIMESTAMP" />
+    <result column="reader_register_date" property="readerRegisterDate" jdbcType="TIMESTAMP" />
+    <result column="Is_borrowed" property="isBorrowed" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    book_id, type_id, book_name, author_name, publishing_house, Publishing_date, reader_register_date, 
+    Is_borrowed
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from book_t
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from book_t
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="szu.library.cs.pojo.Book" >
+    insert into book_t (book_id, type_id, book_name, 
+      author_name, publishing_house, Publishing_date, 
+      reader_register_date, Is_borrowed)
+    values (#{bookId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, 
+      #{authorName,jdbcType=VARCHAR}, #{publishingHouse,jdbcType=VARCHAR}, #{publishingDate,jdbcType=TIMESTAMP}, 
+      #{readerRegisterDate,jdbcType=TIMESTAMP}, #{isBorrowed,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="szu.library.cs.pojo.Book" >
+    insert into book_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="bookName != null" >
+        book_name,
+      </if>
+      <if test="authorName != null" >
+        author_name,
+      </if>
+      <if test="publishingHouse != null" >
+        publishing_house,
+      </if>
+      <if test="publishingDate != null" >
+        Publishing_date,
+      </if>
+      <if test="readerRegisterDate != null" >
+        reader_register_date,
+      </if>
+      <if test="isBorrowed != null" >
+        Is_borrowed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorName != null" >
+        #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishingHouse != null" >
+        #{publishingHouse,jdbcType=VARCHAR},
+      </if>
+      <if test="publishingDate != null" >
+        #{publishingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readerRegisterDate != null" >
+        #{readerRegisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isBorrowed != null" >
+        #{isBorrowed,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="szu.library.cs.pojo.Book" >
+    update book_t
+    <set >
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null" >
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorName != null" >
+        author_name = #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishingHouse != null" >
+        publishing_house = #{publishingHouse,jdbcType=VARCHAR},
+      </if>
+      <if test="publishingDate != null" >
+        Publishing_date = #{publishingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readerRegisterDate != null" >
+        reader_register_date = #{readerRegisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isBorrowed != null" >
+        Is_borrowed = #{isBorrowed,jdbcType=INTEGER},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="szu.library.cs.pojo.Book" >
+    update book_t
+    set type_id = #{typeId,jdbcType=INTEGER},
+      book_name = #{bookName,jdbcType=VARCHAR},
+      author_name = #{authorName,jdbcType=VARCHAR},
+      publishing_house = #{publishingHouse,jdbcType=VARCHAR},
+      Publishing_date = #{publishingDate,jdbcType=TIMESTAMP},
+      reader_register_date = #{readerRegisterDate,jdbcType=TIMESTAMP},
+      Is_borrowed = #{isBorrowed,jdbcType=INTEGER}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+</mapper>

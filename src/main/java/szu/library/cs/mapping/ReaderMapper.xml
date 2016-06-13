@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="szu.library.cs.dao.ReaderMapper" >
+  <resultMap id="BaseResultMap" type="szu.library.cs.pojo.Reader" >
+    <id column="reader_id" property="readerId" jdbcType="INTEGER" />
+    <result column="reader_type" property="readerType" jdbcType="VARCHAR" />
+    <result column="reader_name" property="readerName" jdbcType="VARCHAR" />
+    <result column="reader_gender" property="readerGender" jdbcType="VARCHAR" />
+    <result column="reader_address" property="readerAddress" jdbcType="VARCHAR" />
+    <result column="reader_telephone" property="readerTelephone" jdbcType="VARCHAR" />
+    <result column="reader_register_date" property="readerRegisterDate" jdbcType="TIMESTAMP" />
+    <result column="reader_borrowbook" property="readerBorrowbook" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    reader_id, reader_type, reader_name, reader_gender, reader_address, reader_telephone, 
+    reader_register_date, reader_borrowbook, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from reader_t
+    where reader_id = #{readerId,jdbcType=INTEGER}
+  </select>
+  <select id="queryByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from reader_t
+    where reader_name = #{readerName,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="queryByCriteria" parameterType="szu.library.cs.pojo.Reader"  resultMap="BaseResultMap">  
+    select * from reader_t
+    <trim prefix="where" prefixOverrides="AND|OR">    
+    <if test=" readerId != null and ''readerId ">  
+    reader_id = #{readerId}  
+    </if>  
+    <if test=" readerType != null and ''!= readerType " >  
+    and reader_type = #{readerType}  
+    </if>  
+    <if test=" readerName != null and ''!= readerName " >  
+    and reader_name = #{readerName}  
+    </if>  
+    <if test=" readerGender != null and ''!= readerGender " >  
+    and reader_gender=#{readerGender}  
+    </if>  
+    <if test=" readerAddress != null and ''!= readerAddress " >  
+    and reader_address=#{readerAddress}  
+    </if>  
+    <if test=" readerTelephone != null and ''!= readerTelephone " >  
+    and reader_telephone =#{readerTelephone}  
+    </if> 
+     <if test=" status != null and ''!= status " >  
+    and status =#{status}  
+    </if> 
+    
+    </trim>     
+</select>  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reader_t
+    where reader_id = #{readerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="szu.library.cs.pojo.Reader" >
+    insert into reader_t (reader_id, reader_type, reader_name, 
+      reader_gender, reader_address, reader_telephone, 
+      reader_register_date, reader_borrowbook, 
+      status)
+    values (#{readerId,jdbcType=INTEGER}, #{readerType,jdbcType=VARCHAR}, #{readerName,jdbcType=VARCHAR}, 
+      #{readerGender,jdbcType=VARCHAR}, #{readerAddress,jdbcType=VARCHAR}, #{readerTelephone,jdbcType=VARCHAR}, 
+      #{readerRegisterDate,jdbcType=TIMESTAMP}, #{readerBorrowbook,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="szu.library.cs.pojo.Reader" >
+    insert into reader_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="readerId != null" >
+        reader_id,
+      </if>
+      <if test="readerType != null" >
+        reader_type,
+      </if>
+      <if test="readerName != null" >
+        reader_name,
+      </if>
+      <if test="readerGender != null" >
+        reader_gender,
+      </if>
+      <if test="readerAddress != null" >
+        reader_address,
+      </if>
+      <if test="readerTelephone != null" >
+        reader_telephone,
+      </if>
+      <if test="readerRegisterDate != null" >
+        reader_register_date,
+      </if>
+      <if test="readerBorrowbook != null" >
+        reader_borrowbook,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="readerId != null" >
+        #{readerId,jdbcType=INTEGER},
+      </if>
+      <if test="readerType != null" >
+        #{readerType,jdbcType=VARCHAR},
+      </if>
+      <if test="readerName != null" >
+        #{readerName,jdbcType=VARCHAR},
+      </if>
+      <if test="readerGender != null" >
+        #{readerGender,jdbcType=VARCHAR},
+      </if>
+      <if test="readerAddress != null" >
+        #{readerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="readerTelephone != null" >
+        #{readerTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="readerRegisterDate != null" >
+        #{readerRegisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readerBorrowbook != null" >
+        #{readerBorrowbook,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="szu.library.cs.pojo.Reader" >
+    update reader_t
+    <set >
+      <if test="readerType != null" >
+        reader_type = #{readerType,jdbcType=VARCHAR},
+      </if>
+      <if test="readerName != null" >
+        reader_name = #{readerName,jdbcType=VARCHAR},
+      </if>
+      <if test="readerGender != null" >
+        reader_gender = #{readerGender,jdbcType=VARCHAR},
+      </if>
+      <if test="readerAddress != null" >
+        reader_address = #{readerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="readerTelephone != null" >
+        reader_telephone = #{readerTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="readerRegisterDate != null" >
+        reader_register_date = #{readerRegisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readerBorrowbook != null" >
+        reader_borrowbook = #{readerBorrowbook,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where reader_id = #{readerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="szu.library.cs.pojo.Reader" >
+    update reader_t
+    set reader_type = #{readerType,jdbcType=VARCHAR},
+      reader_name = #{readerName,jdbcType=VARCHAR},
+      reader_gender = #{readerGender,jdbcType=VARCHAR},
+      reader_address = #{readerAddress,jdbcType=VARCHAR},
+      reader_telephone = #{readerTelephone,jdbcType=VARCHAR},
+      reader_register_date = #{readerRegisterDate,jdbcType=TIMESTAMP},
+      reader_borrowbook = #{readerBorrowbook,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where reader_id = #{readerId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="szu.library.cs.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="szu.library.cs.pojo.Account" >
+    <id column="account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="borrow_id" property="borrowId" jdbcType="INTEGER" />
+    <result column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="account_date" property="accountDate" jdbcType="TIMESTAMP" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="staff_id" property="staffId" jdbcType="INTEGER" />
+    <result column="work_sate" property="workSate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    account_id, borrow_id, item_id, item_name, account_date, amount, staff_id, work_sate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from account_t
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from account_t
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="szu.library.cs.pojo.Account" >
+    insert into account_t (account_id, borrow_id, item_id, 
+      item_name, account_date, amount, 
+      staff_id, work_sate)
+    values (#{accountId,jdbcType=INTEGER}, #{borrowId,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, 
+      #{itemName,jdbcType=VARCHAR}, #{accountDate,jdbcType=TIMESTAMP}, #{amount,jdbcType=DECIMAL}, 
+      #{staffId,jdbcType=INTEGER}, #{workSate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="szu.library.cs.pojo.Account" >
+    insert into account_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="borrowId != null" >
+        borrow_id,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemName != null" >
+        item_name,
+      </if>
+      <if test="accountDate != null" >
+        account_date,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="workSate != null" >
+        work_sate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowId != null" >
+        #{borrowId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDate != null" >
+        #{accountDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="workSate != null" >
+        #{workSate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="szu.library.cs.pojo.Account" >
+    update account_t
+    <set >
+      <if test="borrowId != null" >
+        borrow_id = #{borrowId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDate != null" >
+        account_date = #{accountDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="workSate != null" >
+        work_sate = #{workSate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="szu.library.cs.pojo.Account" >
+    update account_t
+    set borrow_id = #{borrowId,jdbcType=INTEGER},
+      item_id = #{itemId,jdbcType=INTEGER},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      account_date = #{accountDate,jdbcType=TIMESTAMP},
+      amount = #{amount,jdbcType=DECIMAL},
+      staff_id = #{staffId,jdbcType=INTEGER},
+      work_sate = #{workSate,jdbcType=VARCHAR}
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+</mapper>

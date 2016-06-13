@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="szu.library.cs.dao.SystemSettingMapper" >
+  <resultMap id="BaseResultMap" type="szu.library.cs.pojo.SystemSetting" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+    <result column="system_value" property="systemValue" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, system_key, system_value, remarks
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from system_setting_t
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from system_setting_t
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="szu.library.cs.pojo.SystemSetting" >
+    insert into system_setting_t (id, system_key, system_value, 
+      remarks)
+    values (#{id,jdbcType=INTEGER}, #{systemKey,jdbcType=VARCHAR}, #{systemValue,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="szu.library.cs.pojo.SystemSetting" >
+    insert into system_setting_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="systemKey != null" >
+        system_key,
+      </if>
+      <if test="systemValue != null" >
+        system_value,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="systemKey != null" >
+        #{systemKey,jdbcType=VARCHAR},
+      </if>
+      <if test="systemValue != null" >
+        #{systemValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="szu.library.cs.pojo.SystemSetting" >
+    update system_setting_t
+    <set >
+      <if test="systemKey != null" >
+        system_key = #{systemKey,jdbcType=VARCHAR},
+      </if>
+      <if test="systemValue != null" >
+        system_value = #{systemValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="szu.library.cs.pojo.SystemSetting" >
+    update system_setting_t
+    set system_key = #{systemKey,jdbcType=VARCHAR},
+      system_value = #{systemValue,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

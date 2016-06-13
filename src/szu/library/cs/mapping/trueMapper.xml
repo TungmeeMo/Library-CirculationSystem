@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="szu.library.cs.dao.trueMapper" >
+  <resultMap id="BaseResultMap" type="szu.library.cs.pojo.true" >
+    <id column="staff_id" property="staffId" jdbcType="INTEGER" />
+    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+    <result column="Gender" property="gender" jdbcType="VARCHAR" />
+    <result column="Privilege_level" property="privilegeLevel" jdbcType="INTEGER" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    staff_id, staff_name, Gender, Privilege_level, Phone, Address
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="szu.library.cs.pojo.trueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from staff_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff_t
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from staff_t
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="szu.library.cs.pojo.trueExample" >
+    delete from staff_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="szu.library.cs.pojo.true" >
+    insert into staff_t (staff_id, staff_name, Gender, 
+      Privilege_level, Phone, Address
+      )
+    values (#{staffId,jdbcType=INTEGER}, #{staffName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{privilegeLevel,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="szu.library.cs.pojo.true" >
+    insert into staff_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="staffName != null" >
+        staff_name,
+      </if>
+      <if test="gender != null" >
+        Gender,
+      </if>
+      <if test="privilegeLevel != null" >
+        Privilege_level,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="privilegeLevel != null" >
+        #{privilegeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="szu.library.cs.pojo.trueExample" resultType="java.lang.Integer" >
+    select count(*) from staff_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update staff_t
+    <set >
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=INTEGER},
+      </if>
+      <if test="record.staffName != null" >
+        staff_name = #{record.staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        Gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privilegeLevel != null" >
+        Privilege_level = #{record.privilegeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        Phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update staff_t
+    set staff_id = #{record.staffId,jdbcType=INTEGER},
+      staff_name = #{record.staffName,jdbcType=VARCHAR},
+      Gender = #{record.gender,jdbcType=VARCHAR},
+      Privilege_level = #{record.privilegeLevel,jdbcType=INTEGER},
+      Phone = #{record.phone,jdbcType=VARCHAR},
+      Address = #{record.address,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="szu.library.cs.pojo.true" >
+    update staff_t
+    <set >
+      <if test="staffName != null" >
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        Gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="privilegeLevel != null" >
+        Privilege_level = #{privilegeLevel,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="szu.library.cs.pojo.true" >
+    update staff_t
+    set staff_name = #{staffName,jdbcType=VARCHAR},
+      Gender = #{gender,jdbcType=VARCHAR},
+      Privilege_level = #{privilegeLevel,jdbcType=INTEGER},
+      Phone = #{phone,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR}
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+</mapper>
