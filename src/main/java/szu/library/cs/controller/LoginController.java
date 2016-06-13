@@ -43,6 +43,7 @@ public class LoginController {
 				return "error";
 				
 			}catch(Exception e){
+				e.printStackTrace();
 				model.put("message", "login error.");
 				return "error";
 				

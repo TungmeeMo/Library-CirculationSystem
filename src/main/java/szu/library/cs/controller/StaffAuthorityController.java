@@ -19,7 +19,7 @@ import szu.library.cs.service.IStaffAuthorityService;
 
 @Controller
 @SessionAttributes("currUser")
-@RequestMapping("/staffAuthority")
+@RequestMapping("")
 public class StaffAuthorityController {
 	
 	@Resource
