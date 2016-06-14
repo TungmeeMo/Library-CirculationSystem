@@ -34,11 +34,11 @@
 
 
 	<security:http auto-config='true'>
-		<security:intercept-url pattern="/index.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-			
+		<security:intercept-url pattern="/jsps/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+			<!-- 
 		<security:intercept-url pattern="/password" access="ROLE_ADMIN,ROLE_USER" />
 			
-		<security:intercept-url pattern="/user/**" access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/user/**" access="ROLE_ADMIN" /> -->
 			
 		<security:form-login login-processing-url="/j_spring_security_check"  login-page="/login"
 			default-target-url="/login/action" authentication-failure-url="/login"  password-parameter="j_password"  

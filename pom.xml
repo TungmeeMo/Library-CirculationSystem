@@ -201,6 +201,6 @@
   </dependencies>
 
   <build>
-    <finalName>SSM-test</finalName>
+    <finalName>Library-CirculationSystem</finalName>
   </build>
 </project>

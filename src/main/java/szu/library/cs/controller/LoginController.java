@@ -21,12 +21,6 @@ import szu.library.cs.service.IStaffService;
 public class LoginController {
 	@Resource
 	private IStaffService userService;
-
-	@RequestMapping("/login")
-	public String toLogin() {
-		System.out.println("toLogin function.");
-		return "login";
-	}
     
 	@RequestMapping("/login/action")
 	public String loginAction( String username, String password,ModelMap model, HttpServletResponse response, HttpSession session){
@@ -37,7 +31,7 @@ public class LoginController {
 					model.addAttribute("currUser", staff);
 					session.setAttribute("currUser", staff);
 					model.put("message", "login success.");
-					return "home";
+					return "main";
 				}
 				model.put("message", "用户名或者密码错误！");
 				return "error";
