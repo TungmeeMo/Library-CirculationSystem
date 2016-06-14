@@ -1,14 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<sec:authentication property="principal" var="auth" scope="session" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
 <title>图书馆管理系统</title>
-<link href="<c:url value="${ctx}/resources/CSS/style.css" />" rel="stylesheet">
+<link href="${ctx}/CSS/style.css" rel="stylesheet">
 <script language="javascript">
 function check(form){
 	if (form.name.value==""){
@@ -20,7 +17,7 @@ function check(form){
 }
 </script>
 </head>
-<body">
+<body>
 <table width="778" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#F9D16B" class="tableBorder">
   <tr>
     <td>
@@ -38,7 +35,7 @@ function check(form){
   <tr>
     <td height="523" align="center" valign="top"><table width="100%" height="271"  border="0" cellpadding="0" cellspacing="0">
       <tr>
-        <td height="271" align="right" valign="top" class="word_orange"><table width="100%" height="255"  border="0" cellpadding="0" cellspacing="0" background='<c:url value="${ctx}/resources/Images/login.jpg"/>'>
+        <td height="271" align="right" valign="top" class="word_orange"><table width="100%" height="255"  border="0" cellpadding="0" cellspacing="0" background='${ctx}/Images/login.jpg'>
           <tr>
             <td height="57">&nbsp;</td>
             </tr>

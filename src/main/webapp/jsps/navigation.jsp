@@ -1,15 +1,16 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-int sysset1=0;
-int readerset1=0;
-int bookset1=0;
-int borrowback1=0;
-int sysquery1=0;
+int sysset1=1;
+int readerset1=1;
+int bookset1=1;
+int borrowback1=1;
+int sysquery1=1;
 
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script src="/resources/JS/onclock.JS" charset="gbk"></script>
-<script src="/resources/JS/menu.JS" charset="gbk"></script>
+<script src="${ctx}/JS/onclock.JS" charset="gbk"></script>
+<script src="${ctx}/JS/menu.JS" charset="gbk"></script>
 <div class=menuskin id=popmenu
       onmouseover="clearhidemenu();highlightmenu(event,'on')"
       onmouseout="highlightmenu(event,'off');dynamichide(event)" style="Z-index:100;position:absolute;"></div>
@@ -29,6 +30,6 @@ int sysquery1=0;
         <td width="2%" bgcolor="#B0690B">&nbsp;</td>
   </tr>
       <tr bgcolor="#DFA40C">
-        <td height="9" colspan="4" background="/resources/Images/navigation_bg_bottom.gif"> <img src="/resources/Images/subBG.jpg" alt="kkkkkkkkkkkkkkkk" /></td>
+        <td height="9" colspan="4" background="${ctx}/Images/navigation_bg_bottom.gif"></td>
       </tr>
 </table>

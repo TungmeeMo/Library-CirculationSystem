@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" language="java"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <%
 
@@ -8,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <head>
 <title>图书馆管理系统</title>
-<link href="/resources/CSS/style.css" rel="stylesheet">
+<link href="${ctx}/CSS/style.css" rel="stylesheet">
 </head>
 <body onLoad="clockon(bgclock)">
 <%@include file="banner.jsp"%>
@@ -22,7 +23,7 @@
       <tr>
         <td valign="top"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td height="57" background="/resources/Images/main_booksort.gif">&nbsp;</td>
+            <td height="57" background="${ctx}/Images/main_booksort.gif">&nbsp;</td>
           </tr>
           <tr>
             <td height="72" valign="top"><table width="100%" height="63"  border="0" cellpadding="0" cellspacing="0">
@@ -56,7 +57,7 @@
                 <td width="2%" rowspan="2">&nbsp;</td>
               </tr>
               <tr>
-                <td height="30" align="right" valign="middle"><a href=borrow.do?action=bookBorrowSort><img src="${ctx}/resources/Images/more.GIF" width="50" height="20" border="0">&nbsp;</a></td>
+                <td height="30" align="right" valign="middle"><a href=borrow.do?action=bookBorrowSort><img src="${ctx}/Images/more.GIF" width="50" height="20" border="0">&nbsp;</a></td>
               </tr>
             </table></td>
           </tr>
