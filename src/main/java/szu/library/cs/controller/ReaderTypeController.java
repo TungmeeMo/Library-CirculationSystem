@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import szu.library.cs.pojo.BookType;
 import szu.library.cs.pojo.ReaderType;
 import szu.library.cs.service.IReaderTypeService;
+import szu.library.cs.service.impl.ReaderServiceImpl;
 
 @Controller
 @SessionAttributes("currUser")
@@ -26,9 +29,9 @@ public class ReaderTypeController {
 		return "/reader/newReaderType"; 
 	}
 	
+	
 	@RequestMapping("/readerType/new")
 	public String newReaderType(ReaderType type,ModelMap model){
-		
 		try{
 			String name = type.getTypeName();
 			if( null == service.queryByName(name)){
@@ -39,6 +42,7 @@ public class ReaderTypeController {
 			}
 			
 		}catch(Exception e){
+			e.printStackTrace();
 			model.put("message", "新增失败，请重试！");
 		}
 		return "home";
@@ -47,11 +51,8 @@ public class ReaderTypeController {
 	@RequestMapping("/readerType/toShowlist")
 	public String listAll(ModelMap model){
 		
-		try{
-			List<ReaderType> list = service.getAll();
-			model.put("list", list);
-		}catch(Exception e){
-		}
+		List<ReaderType> list = service.getAll();
+		model.put("list", list);
 		return "/reader/listReaderType";
 	}
 	
@@ -69,6 +70,7 @@ public class ReaderTypeController {
 			service.updateByPrimaryKey(type);
 			model.put("message", "更新成功！");
 		}catch(Exception e){
+			e.printStackTrace();
 			model.put("message", "更新失败，请重试！");
 		}
 		return listAll(model);
@@ -81,6 +83,7 @@ public class ReaderTypeController {
 			service.deleteByPrimaryKey(Integer.parseInt(id));
 			model.put("message", "删除成功！");
 		}catch(Exception e){
+			e.printStackTrace();
 			model.put("message", "删除失败，请重试！");
 		}
 		return listAll(model);
@@ -89,12 +92,8 @@ public class ReaderTypeController {
 	@RequestMapping("/readerType/queryByName")
 	public String queryByName(HttpServletRequest request,ModelMap model){
 		String typeName = request.getParameter("typeName"); 
-		try{
-			ReaderType readerType = service.queryByName(typeName);
-			model.put("readerType", readerType);
-		}catch(Exception e){
-			model.put("message", "查询失败，请重试！");
-		}
+		ReaderType readerType = service.queryByName(typeName);
+		model.put("readerType", readerType);
 		return "";
 	}
 	

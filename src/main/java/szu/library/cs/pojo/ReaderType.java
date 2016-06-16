@@ -7,11 +7,11 @@ public class ReaderType {
 
     private String typeName;
 
-    private String bookMaxmum;
+    private Integer bookMaxmum;
 
-    private Date bookLimitedDay;
+    private Integer bookLimitedDay;
 
-    private String validPeriod;
+    private Integer validPeriod;
 
     public Integer getTypeId() {
         return typeId;
@@ -29,27 +29,30 @@ public class ReaderType {
         this.typeName = typeName == null ? null : typeName.trim();
     }
 
-    public String getBookMaxmum() {
-        return bookMaxmum;
+
+    public void setBookMaxmum(Integer bookMaxmum) {
+        this.bookMaxmum = bookMaxmum;
     }
 
-    public void setBookMaxmum(String bookMaxmum) {
-        this.bookMaxmum = bookMaxmum == null ? null : bookMaxmum.trim();
-    }
+	public Integer getBookLimitedDay() {
+		return bookLimitedDay;
+	}
 
-    public Date getBookLimitedDay() {
-        return bookLimitedDay;
-    }
+	public void setBookLimitedDay(Integer bookLimitedDay) {
+		this.bookLimitedDay = bookLimitedDay;
+	}
 
-    public void setBookLimitedDay(Date bookLimitedDay) {
-        this.bookLimitedDay = bookLimitedDay;
-    }
+	public Integer getValidPeriod() {
+		return validPeriod;
+	}
 
-    public String getValidPeriod() {
-        return validPeriod;
-    }
+	public void setValidPeriod(Integer validPeriod) {
+		this.validPeriod = validPeriod;
+	}
 
-    public void setValidPeriod(String validPeriod) {
-        this.validPeriod = validPeriod == null ? null : validPeriod.trim();
-    }
+	public Integer getBookMaxmum() {
+		return bookMaxmum;
+	}
+
+    
 }

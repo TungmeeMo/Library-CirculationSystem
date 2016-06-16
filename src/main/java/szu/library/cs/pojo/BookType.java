@@ -1,7 +1,9 @@
 package szu.library.cs.pojo;
 
 public class BookType {
-    private Integer typeId;
+	private Integer id;
+	
+    private String typeId;
 
     private String typeName;
 
@@ -19,15 +21,25 @@ public class BookType {
 
     private String place;
 
-    public Integer getTypeId() {
-        return typeId;
-    }
+    
+    
+    public Integer getId() {
+		return id;
+	}
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getTypeName() {
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
+
+	public String getTypeName() {
         return typeName;
     }
 

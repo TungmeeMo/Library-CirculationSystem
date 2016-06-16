@@ -1,16 +1,18 @@
 package szu.library.cs.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import szu.library.cs.pojo.Book;
 import szu.library.cs.pojo.Reader;
-import szu.library.cs.pojo.ReaderType;
 import szu.library.cs.service.IReaderService;
 
 @Controller
@@ -88,6 +90,21 @@ public class ReaderController {
 			model.put("message", "≤È—Ø ß∞‹£¨«Î÷ÿ ‘£°");
 		}
 		return "";
+	}
+	
+//	@RequestMapping("/reader/queryById")
+	@RequestMapping(value = "/queryById", method = RequestMethod.GET)  
+	@ResponseBody  
+	public Map<String, Object> queryById(String readerId,ModelMap model){
+		Map<String, Object> map = new HashMap<String, Object>();  
+		try{
+			Reader reader = service.selectByPrimaryKey(Integer.parseInt(readerId));
+			map.put("data", reader);  
+			map.put("success", "true");  
+		}catch(Exception e){
+			map.put("success", "false");  
+		}
+		return map;
 	}
 
 }

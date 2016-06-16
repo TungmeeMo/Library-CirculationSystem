@@ -15,7 +15,7 @@ public class BookTypeServiceImpl implements IBookTypeService{
 
 	@Resource
 	private BookTypeMapper dao;
-	public int deleteByPrimaryKey(Integer typeId) {
+	public int deleteByPrimaryKey(String typeId) {
 		return dao.deleteByPrimaryKey(typeId);
 	}
 
@@ -30,7 +30,7 @@ public class BookTypeServiceImpl implements IBookTypeService{
 	}
 
 	
-	public BookType selectByPrimaryKey(Integer typeId) {
+	public BookType selectByPrimaryKey(String typeId) {
 		return dao.selectByPrimaryKey(typeId);
 	}
 

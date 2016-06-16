@@ -9,7 +9,7 @@ public class Circulation {
 
     private Integer readerId;
 
-    private Integer bookId;
+    private String bookId;
 
     private Date borrowDate;
 
@@ -47,15 +47,15 @@ public class Circulation {
         this.readerId = readerId;
     }
 
-    public Integer getBookId() {
-        return bookId;
-    }
+    public String getBookId() {
+		return bookId;
+	}
 
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
 
-    public Date getBorrowDate() {
+	public Date getBorrowDate() {
         return borrowDate;
     }
 

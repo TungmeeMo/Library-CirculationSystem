@@ -5,7 +5,7 @@
     <id column="borrow_id" property="borrowId" jdbcType="INTEGER" />
     <result column="staff_id" property="staffId" jdbcType="INTEGER" />
     <result column="reader_id" property="readerId" jdbcType="INTEGER" />
-    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="VARCHAR" />
     <result column="borrow_date" property="borrowDate" jdbcType="TIMESTAMP" />
     <result column="return_date" property="returnDate" jdbcType="TIMESTAMP" />
     <result column="expect_date" property="expectDate" jdbcType="TIMESTAMP" />
@@ -33,7 +33,7 @@
       expect_date, status, continue_times, 
       operation_type)
     values (#{borrowId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{readerId,jdbcType=INTEGER}, 
-      #{bookId,jdbcType=INTEGER}, #{borrowDate,jdbcType=TIMESTAMP}, #{returnDate,jdbcType=TIMESTAMP}, 
+      #{bookId,jdbcType=VARCHAR}, #{borrowDate,jdbcType=TIMESTAMP}, #{returnDate,jdbcType=TIMESTAMP}, 
       #{expectDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{continueTimes,jdbcType=INTEGER}, 
       #{operationType,jdbcType=INTEGER})
   </insert>
@@ -82,7 +82,7 @@
         #{readerId,jdbcType=INTEGER},
       </if>
       <if test="bookId != null" >
-        #{bookId,jdbcType=INTEGER},
+        #{bookId,jdbcType=VARCHAR},
       </if>
       <if test="borrowDate != null" >
         #{borrowDate,jdbcType=TIMESTAMP},
@@ -114,7 +114,7 @@
         reader_id = #{readerId,jdbcType=INTEGER},
       </if>
       <if test="bookId != null" >
-        book_id = #{bookId,jdbcType=INTEGER},
+        book_id = #{bookId,jdbcType=VARCHAR},
       </if>
       <if test="borrowDate != null" >
         borrow_date = #{borrowDate,jdbcType=TIMESTAMP},
@@ -141,7 +141,7 @@
     update circulation_t
     set staff_id = #{staffId,jdbcType=INTEGER},
       reader_id = #{readerId,jdbcType=INTEGER},
-      book_id = #{bookId,jdbcType=INTEGER},
+      book_id = #{bookId,jdbcType=VARCHAR},
       borrow_date = #{borrowDate,jdbcType=TIMESTAMP},
       return_date = #{returnDate,jdbcType=TIMESTAMP},
       expect_date = #{expectDate,jdbcType=TIMESTAMP},

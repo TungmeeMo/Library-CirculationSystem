@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="szu.library.cs.dao.BookTypeMapper" >
   <resultMap id="BaseResultMap" type="szu.library.cs.pojo.BookType" >
-    <id column="type_id" property="typeId" jdbcType="INTEGER" />
+    <id column="type_id" property="typeId" jdbcType="VARCHAR" />
     <result column="type_name" property="typeName" jdbcType="VARCHAR" />
     <result column="source_base_type" property="sourceBaseType" jdbcType="VARCHAR" />
     <result column="record_type" property="recordType" jdbcType="VARCHAR" />
@@ -16,27 +16,27 @@
     type_id, type_name, source_base_type, record_type, document_type, code, class_id_min, 
     class_id_max, place
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from book_type_t
-    where type_id = #{typeId,jdbcType=INTEGER}
+    where type_id = #{typeId,jdbcType=VARCHAR}
   </select>
   <select id="queryByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select *
     from book_type_t
     where type_name = #{typeName,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from book_type_t
-    where type_id = #{typeId,jdbcType=INTEGER}
+    where type_id = #{typeId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="szu.library.cs.pojo.BookType" >
     insert into book_type_t (type_id, type_name, source_base_type, 
       record_type, document_type, code, 
       class_id_min, class_id_max, place
       )
-    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{sourceBaseType,jdbcType=VARCHAR}, 
+    values (#{typeId,jdbcType=VARCHAR}, #{typeName,jdbcType=VARCHAR}, #{sourceBaseType,jdbcType=VARCHAR}, 
       #{recordType,jdbcType=VARCHAR}, #{documentType,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
       #{classIdMin,jdbcType=VARCHAR}, #{classIdMax,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}
       )
@@ -74,7 +74,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="typeId != null" >
-        #{typeId,jdbcType=INTEGER},
+        #{typeId,jdbcType=VARCHAR},
       </if>
       <if test="typeName != null" >
         #{typeName,jdbcType=VARCHAR},
@@ -130,7 +130,7 @@
         place = #{place,jdbcType=VARCHAR},
       </if>
     </set>
-    where type_id = #{typeId,jdbcType=INTEGER}
+    where type_id = #{typeId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="szu.library.cs.pojo.BookType" >
     update book_type_t
@@ -142,6 +142,6 @@
       class_id_min = #{classIdMin,jdbcType=VARCHAR},
       class_id_max = #{classIdMax,jdbcType=VARCHAR},
       place = #{place,jdbcType=VARCHAR}
-    where type_id = #{typeId,jdbcType=INTEGER}
+    where type_id = #{typeId,jdbcType=VARCHAR}
   </update>
 </mapper>

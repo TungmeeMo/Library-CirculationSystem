@@ -31,7 +31,7 @@ public class LoginController {
 					model.addAttribute("currUser", staff);
 					session.setAttribute("currUser", staff);
 					model.put("message", "login success.");
-					return "main";
+					return "home";
 				}
 				model.put("message", "用户名或者密码错误！");
 				return "error";
@@ -64,19 +64,19 @@ public class LoginController {
 //		return "home";
 //	}
 
-	@RequestMapping("/password")
-	public String toPassword() {
-		return "password";
-	}
-
-	@RequestMapping("/password/save")
-	public String pwdToSave(HttpServletRequest request,HttpSession session, Model model, String password) {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		// 改密码
-		Staff staff = (Staff)session.getAttribute("currUser");
-		staff.setPassword(password);
-		userService.updateByPrimaryKeySelective(staff);
-		return "password";
-	}
+//	@RequestMapping("/password")
+//	public String toPassword() {
+//		return "password";
+//	}
+//
+//	@RequestMapping("/password/save")
+//	public String pwdToSave(HttpServletRequest request,HttpSession session, Model model, String password) {
+//		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		// 改密码
+//		Staff staff = (Staff)session.getAttribute("currUser");
+//		staff.setPassword(password);
+//		userService.updateByPrimaryKeySelective(staff);
+//		return "password";
+//	}
 
 }

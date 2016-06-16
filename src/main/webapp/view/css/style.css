@@ -1,0 +1,252 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+    /*background-image: url(../img/bg.png);*/
+}
+
+
+/*header*/
+
+.header {
+    width: 960px;
+    height: 155px;
+    background-color: #faeeb6;
+    margin: 0 auto;
+}
+
+.header h1 {
+    padding-top: 30px;
+    padding-bottom: 15px;
+    font-size: 40px;
+    text-align: center;
+}
+
+#menu {
+    position: relative;
+    font-family: "黑体";
+    margin-top: 25px;
+    float: right;
+}
+
+#menu ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+#menu ul li {
+    border-bottom: 1px solid #007300;
+    position: relative;
+    float: left;
+    width: 120px;
+}
+
+#menu ul li a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid #faeeb6;
+}
+
+#menu ul li a:link,
+#menu ul li a:visited {
+    background-color: #dea417;
+    color: #004600;
+}
+
+#menu ul li a:hover {
+    background-color: #dea417;
+    color: #004600;
+}
+
+#menu ul li ul {
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: 30px;
+    border: 1px solid #003E00;
+}
+
+#menu ul li:hover ul {
+    display: block
+}
+
+#menu ul li ul li a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    border: 1px solid #faeeb6;
+}
+
+#menu ul li ul li a:link,
+#menu ul li a:visited {
+    background-color: #dea417;
+    color: #004500;
+}
+
+#menu ul li ul li a:hover {
+    background-color: #dea417;
+    color: #001500;
+}
+
+
+/*main*/
+
+
+/*reader*/
+
+.container {
+    width: 960px;
+    min-height: 600px;
+    background-color: #FFFAEB;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.container h2 {
+    font-size: 30px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.container .reader {
+    margin-bottom: 60px;
+}
+
+.container .reader .readerHeader {
+    padding-top: 10px;
+    margin-left: 20px;
+    padding-bottom: 10px;
+}
+
+.container .reader .bookinfo {
+    margin-top: 20px;   
+    width: 960px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+.container .reader .bookinfo tr {
+    /*border: 1px solid #000;*/
+}
+
+.container .reader .bookinfo td {
+    border: 1px solid #000;
+    text-align: center;
+}
+
+.container .reader .bookinfo input {
+    width: 80px;
+}
+
+.container .reader h3 {
+    padding-top: 10px;
+    display: inline;
+    font-size: 20px;
+    padding-right: 40px;
+}
+
+.container .reader input[name="readerId"] {
+    margin-left: 10px;
+    width: 150px;
+}
+
+.container .reader input[name="button1"] {
+    width: 50px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.container .reader td {
+    height: 40px;
+}
+
+
+/*book*/
+
+.container .book {
+    margin-bottom: 10px;
+}
+
+.container .book .bookHeader {
+    padding-top: 10px;
+    margin-left: 20px;
+    padding-bottom: 10px;
+}
+
+.container .book table {
+    /*padding-top: 10px;*/
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.container .book tr {
+    width: 960px;
+}
+
+.container .book td {
+    border: 1px solid #000;
+    text-align: center;
+}
+
+.container .book h3 {
+    padding-top: 10px;
+    display: inline;
+    font-size: 20px;
+    padding-right: 40px;
+}
+
+.container .book input {
+    width: 120px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.container .book input[name="bookId"] {
+    margin-left: 10px;
+    width: 150px;
+}
+
+.container .book input[name="button2"] {
+    width: 50px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.container .book input[name="button3"] {
+    width: 50px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.container .book td {
+    height: 40px;
+}
+
+
+/*footer*/
+
+.footer {
+    width: 960px;
+    height: 155px;
+    background-color: #faeeb6;
+    margin: 0 auto;
+}
+
+.footer p {
+    padding-top: 50px;
+    text-align: center;
+}
+
+.container .book{
+	margin-top: 20px;   
+    width: 800px;
+    overflow: hidden;
+    border-collapse: collapse;
+}

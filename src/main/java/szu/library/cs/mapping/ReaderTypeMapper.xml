@@ -4,9 +4,9 @@
   <resultMap id="BaseResultMap" type="szu.library.cs.pojo.ReaderType" >
     <id column="type_id" property="typeId" jdbcType="INTEGER" />
     <result column="type_name" property="typeName" jdbcType="VARCHAR" />
-    <result column="book_maxmum" property="bookMaxmum" jdbcType="VARCHAR" />
-    <result column="book_limited_day" property="bookLimitedDay" jdbcType="TIMESTAMP" />
-    <result column="valid_period" property="validPeriod" jdbcType="VARCHAR" />
+    <result column="book_maxmum" property="bookMaxmum" jdbcType="INTEGER" />
+    <result column="book_limited_day" property="bookLimitedDay" jdbcType="INTEGER" />
+    <result column="valid_period" property="validPeriod" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     type_id, type_name, book_maxmum, book_limited_day, valid_period
@@ -36,8 +36,8 @@
   <insert id="insert" parameterType="szu.library.cs.pojo.ReaderType" >
     insert into reader_type_t (type_id, type_name, book_maxmum, 
       book_limited_day, valid_period)
-    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{bookMaxmum,jdbcType=VARCHAR}, 
-      #{bookLimitedDay,jdbcType=TIMESTAMP}, #{validPeriod,jdbcType=VARCHAR})
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{bookMaxmum,jdbcType=INTEGER}, 
+      #{bookLimitedDay,jdbcType=INTEGER}, #{validPeriod,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="szu.library.cs.pojo.ReaderType" >
     insert into reader_type_t
@@ -66,13 +66,13 @@
         #{typeName,jdbcType=VARCHAR},
       </if>
       <if test="bookMaxmum != null" >
-        #{bookMaxmum,jdbcType=VARCHAR},
+        #{bookMaxmum,jdbcType=INTEGER},
       </if>
       <if test="bookLimitedDay != null" >
-        #{bookLimitedDay,jdbcType=TIMESTAMP},
+        #{bookLimitedDay,jdbcType=INTEGER},
       </if>
       <if test="validPeriod != null" >
-        #{validPeriod,jdbcType=VARCHAR},
+        #{validPeriod,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -83,13 +83,13 @@
         type_name = #{typeName,jdbcType=VARCHAR},
       </if>
       <if test="bookMaxmum != null" >
-        book_maxmum = #{bookMaxmum,jdbcType=VARCHAR},
+        book_maxmum = #{bookMaxmum,jdbcType=INTEGER},
       </if>
       <if test="bookLimitedDay != null" >
-        book_limited_day = #{bookLimitedDay,jdbcType=TIMESTAMP},
+        book_limited_day = #{bookLimitedDay,jdbcType=INTEGER},
       </if>
       <if test="validPeriod != null" >
-        valid_period = #{validPeriod,jdbcType=VARCHAR},
+        valid_period = #{validPeriod,jdbcType=INTEGER},
       </if>
     </set>
     where type_id = #{typeId,jdbcType=INTEGER}
@@ -97,9 +97,9 @@
   <update id="updateByPrimaryKey" parameterType="szu.library.cs.pojo.ReaderType" >
     update reader_type_t
     set type_name = #{typeName,jdbcType=VARCHAR},
-      book_maxmum = #{bookMaxmum,jdbcType=VARCHAR},
-      book_limited_day = #{bookLimitedDay,jdbcType=TIMESTAMP},
-      valid_period = #{validPeriod,jdbcType=VARCHAR}
+      book_maxmum = #{bookMaxmum,jdbcType=INTEGER},
+      book_limited_day = #{bookLimitedDay,jdbcType=INTEGER},
+      valid_period = #{validPeriod,jdbcType=INTEGER}
     where type_id = #{typeId,jdbcType=INTEGER}
   </update>
 </mapper>

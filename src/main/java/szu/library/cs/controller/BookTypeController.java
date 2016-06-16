@@ -1,11 +1,16 @@
 package szu.library.cs.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import szu.library.cs.pojo.BookType;
 import szu.library.cs.pojo.Reader;
@@ -43,7 +48,7 @@ public class BookTypeController {
 	@RequestMapping("/bookType/toEdit")
 	public String toEdit(HttpServletRequest request,ModelMap model){
 		String id = request.getParameter("id"); 
-		BookType type = service.selectByPrimaryKey(Integer.parseInt(id));
+		BookType type = service.selectByPrimaryKey(id);
 		model.put("bookType", type);
 		return "/book/editBookType";
 	}
@@ -63,7 +68,7 @@ public class BookTypeController {
 	public String delete(HttpServletRequest request,ModelMap model){
 		String id = request.getParameter("id"); 
 		try{
-			service.deleteByPrimaryKey(Integer.parseInt(id));
+			service.deleteByPrimaryKey(id);
 			model.put("message", "…æ≥˝≥…π¶£°");
 		}catch(Exception e){
 			model.put("message", "…æ≥˝ ß∞‹£¨«Î÷ÿ ‘£°");
@@ -82,4 +87,6 @@ public class BookTypeController {
 		}
 		return "";
 	}
+	
+	
 }

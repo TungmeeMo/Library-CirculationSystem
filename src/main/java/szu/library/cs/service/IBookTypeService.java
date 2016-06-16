@@ -6,13 +6,13 @@ import szu.library.cs.pojo.BookType;
 
 public interface IBookTypeService {
 	
-	int deleteByPrimaryKey(Integer typeId);
+	int deleteByPrimaryKey(String typeId);
 
     int insert(BookType record);
 
     int insertSelective(BookType record);
 
-    BookType selectByPrimaryKey(Integer typeId);
+    BookType selectByPrimaryKey(String typeId);
 
     int updateByPrimaryKeySelective(BookType record);
 

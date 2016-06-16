@@ -3,9 +3,14 @@ package szu.library.cs.pojo;
 import java.util.Date;
 
 public class Book {
-    private Integer bookId;
+	
+	private Integer id;
+	
+    private String bookId;
 
-    private Integer typeId;
+    private String typeId;
+    
+    private String typeName;
 
     private String bookName;
 
@@ -18,24 +23,35 @@ public class Book {
     private Date readerRegisterDate;
 
     private Integer isBorrowed;
+    
+    private String isBorrowedName;
 
-    public Integer getBookId() {
-        return bookId;
-    }
+    public Integer getId() {
+		return id;
+	}
 
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getTypeId() {
-        return typeId;
-    }
+	
+	public String getBookId() {
+		return bookId;
+	}
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
-    }
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
 
-    public String getBookName() {
+    public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
+
+	public String getBookName() {
         return bookName;
     }
 
@@ -82,4 +98,22 @@ public class Book {
     public void setIsBorrowed(Integer isBorrowed) {
         this.isBorrowed = isBorrowed;
     }
+
+	public String getIsBorrowedName() {
+		return isBorrowedName;
+	}
+
+	public void setIsBorrowedName(String isBorrowedName) {
+		this.isBorrowedName = isBorrowedName;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+    
+    
 }

@@ -17,10 +17,10 @@
     reader_register_date, reader_borrowbook, status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from reader_t
-    where reader_id = #{readerId,jdbcType=INTEGER}
+   select *,reader_type_t.type_name as readerTypeName,gender_t.name as readerGenderName, reader_status_t.name as statusName, reader_type_t.book_maxmum as maxBookNum
+ from reader_t left join reader_type_t on reader_type_t.type_id= reader_t.reader_type left join reader_status_t on reader_status_t.id=reader_t.status left join gender_t on gender_t.id=reader_gender
+where reader_t.reader_id=  #{readerId,jdbcType=INTEGER}
+
   </select>
   <select id="queryByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 

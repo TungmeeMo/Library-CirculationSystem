@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="szu.library.cs.dao.circulationDetailMapper" >
+  <resultMap id="BaseResultMap" type="szu.library.cs.pojo.circulationDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="borrow_id" property="borrowId" jdbcType="INTEGER" />
+    <result column="staff_id" property="staffId" jdbcType="INTEGER" />
+    <result column="operation_type" property="operationType" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="operated_date" property="operatedDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, borrow_id, staff_id, operation_type, ip, operated_date, remarks
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from circulation_detail_t
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from circulation_detail_t
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="szu.library.cs.pojo.circulationDetail" >
+    insert into circulation_detail_t (id, borrow_id, staff_id, 
+      operation_type, ip, operated_date, 
+      remarks)
+    values (#{id,jdbcType=INTEGER}, #{borrowId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, 
+      #{operationType,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{operatedDate,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="szu.library.cs.pojo.circulationDetail" >
+    insert into circulation_detail_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="borrowId != null" >
+        borrow_id,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="operationType != null" >
+        operation_type,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="operatedDate != null" >
+        operated_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="borrowId != null" >
+        #{borrowId,jdbcType=INTEGER},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="operationType != null" >
+        #{operationType,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="operatedDate != null" >
+        #{operatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="szu.library.cs.pojo.circulationDetail" >
+    update circulation_detail_t
+    <set >
+      <if test="borrowId != null" >
+        borrow_id = #{borrowId,jdbcType=INTEGER},
+      </if>
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="operationType != null" >
+        operation_type = #{operationType,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="operatedDate != null" >
+        operated_date = #{operatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="szu.library.cs.pojo.circulationDetail" >
+    update circulation_detail_t
+    set borrow_id = #{borrowId,jdbcType=INTEGER},
+      staff_id = #{staffId,jdbcType=INTEGER},
+      operation_type = #{operationType,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR},
+      operated_date = #{operatedDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

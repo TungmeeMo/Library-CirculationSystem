@@ -17,7 +17,7 @@ public class BookServiceImpl implements IBookService {
 	@Resource
 	private BookMapper dao;
 	
-	public int deleteByPrimaryKey(Integer bookId) {
+	public int deleteByPrimaryKey(String bookId) {
 		return dao.deleteByPrimaryKey(bookId);
 	}
 
@@ -32,7 +32,7 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	
-	public Book selectByPrimaryKey(Integer bookId) {
+	public Book selectByPrimaryKey(String bookId) {
 		return dao.selectByPrimaryKey(bookId);
 	}
 
@@ -49,6 +49,10 @@ public class BookServiceImpl implements IBookService {
 	
 	public List queryByCriteria(Book book) {
 		return dao.queryByCriteria(book);
+	}
+	
+	public Book queryByBookId(String name){
+		return dao.queryByBookId(name);
 	}
 
 }
