@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*,szu.library.cs.pojo.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<c:set var="httpRoot" value="http://localhost:8080/Library-CirculationSystem/" />
 <%Staff staff = (Staff)request.getSession().getAttribute("currUser");
  int staffId = staff.getStaffId();
 
@@ -68,7 +67,7 @@
             <div class="readerHeader">
                 <h3>读者信息</h3> 读者编号:
                 <input name="readerId" type="text" id="readerId">
-                <input id="queryReader" name="queryReader" type="button" onclick="queryReaderById('${httpRoot}')" value="搜索">
+                <input id="queryReader" name="queryReader" type="button" onclick="queryReaderById('${ctx}','readerBorrowInfo')" value="搜索">
             </div>
             <hr width="959px" size="1">
             <table class="readerinfo">
@@ -104,12 +103,12 @@
                 </tr>
             </table>
              <hr width="959px" size="1">
-            <table class="bookinfo">
+            <table class="bookinfo" id="readerBorrowInfo">
                 <tr>
                     <td>借阅编号</td>
-                    <td>员工编号</td>
-                    <td>读者编号</td>
-                    <td>书籍编号</td>
+                    <td>员工</td>
+                    <td>读者</td>
+                    <td>书籍</td>
                     <td>借书日期</td>
                     <td>还书日期</td>
                     <td>应还日期</td>
@@ -117,39 +116,6 @@
                     <td>续借次数</td>
                     <td>操作类型</td>
                 </tr>
-                <tr>
-                    <td>
-                        <div id="borrowID"  ></div>
-                    </td>
-                    <td>
-                    	<div id="staffID"></div>
-                    </td>
-                    <td>
-                    	<div id="readerID"></div>
-                    </td>
-                    <td>
-                    	<div id="bookID" ></div>
-                    </td>
-                    <td>
-                    	<div id="borrowDate" ></div>
-                    </td>
-                    <td>
-                    	<div id="returnDate" ></div>
-                    </td>
-                    <td>
-                    	<div id="expectDate" ></div>
-                    </td>
-                    <td>
-                    	<div id="status"></div>
-                    </td>
-                    <td>
-                    	<div id="continueTimes" ></div>
-                    </td>
-                    <td>
-                    	<div id="operationType"></div>
-                    </td>
-                </tr>
-
             </table>
         </div>
         <hr width="959px" size="1">
@@ -157,12 +123,12 @@
             <div class="bookHeader">
                 <h3>图书信息</h3> 图书条形码:
                 <input name="bookId" type="text" id="bookId">
-                <input name="button2" type="button" value="搜索" onclick="queryBookById('${httpRoot}')">
-                <input name="button3" type="button" value="借阅" onclick="borrowBook('${httpRoot}')">
+                <input name="button2" type="button" value="搜索" onclick="queryBookById('${ctx}')">
+                <input name="button3" type="button" value="借阅" onclick="borrowBook('${ctx}')">
                 <input type="hidden" id="staffId" value="<%=staffId %>" >
             </div>
             <hr width="959px" size="1">
-            <table class="book">
+            <table class="book" id="showBookInfo">
                 <tr>
                     <td>类别编号</td>
                     <td>书名</td>

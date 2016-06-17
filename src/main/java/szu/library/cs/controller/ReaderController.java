@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import szu.library.cs.pojo.Circulation;
 import szu.library.cs.pojo.Reader;
+import szu.library.cs.service.IBookService;
+import szu.library.cs.service.ICirculationDetailService;
+import szu.library.cs.service.ICirculationService;
 import szu.library.cs.service.IReaderService;
 
 @Controller
@@ -20,6 +24,9 @@ import szu.library.cs.service.IReaderService;
 public class ReaderController {
 	@Resource
 	private IReaderService service;
+	
+	@Resource
+	private ICirculationService cirService;
 	
 	@RequestMapping("/reader/toNew")
 	public String toNew(){
@@ -99,7 +106,13 @@ public class ReaderController {
 		Map<String, Object> map = new HashMap<String, Object>();  
 		try{
 			Reader reader = service.selectByPrimaryKey(Integer.parseInt(readerId));
+			if(reader==null){
+				map.put("success", "false"); 
+				return map;
+			}
+			List<Circulation> cirList = cirService.getForReader(Integer.parseInt(readerId));
 			map.put("data", reader);  
+			map.put("circulationList", cirList);  
 			map.put("success", "true");  
 		}catch(Exception e){
 			map.put("success", "false");  

@@ -1,5 +1,7 @@
 package szu.library.cs.service;
 
+import java.util.List;
+
 import szu.library.cs.pojo.Circulation;
 
 public interface ICirculationService {
@@ -14,4 +16,6 @@ public interface ICirculationService {
     int updateByPrimaryKeySelective(Circulation record);
 
     int updateByPrimaryKey(Circulation record);
+    
+    List getForReader(Integer readerId);
 }

@@ -1,5 +1,7 @@
 package szu.library.cs.dao;
 
+import java.util.List;
+
 import szu.library.cs.pojo.Circulation;
 
 public interface CirculationMapper {
@@ -14,4 +16,6 @@ public interface CirculationMapper {
     int updateByPrimaryKeySelective(Circulation record);
 
     int updateByPrimaryKey(Circulation record);
+    
+    List getForReader(Integer readerId);
 }

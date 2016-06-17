@@ -6,10 +6,16 @@ public class Circulation {
     private Integer borrowId;
 
     private Integer staffId;
+    
+    private String staffName;
 
     private Integer readerId;
+    
+    private String readerName;
 
     private String bookId;
+    
+    private String bookName;
 
     private Date borrowDate;
 
@@ -18,10 +24,14 @@ public class Circulation {
     private Date expectDate;
 
     private Integer status;
+    
+    private String statusName;
 
     private Integer continueTimes;
 
     private Integer operationType;
+    
+    private String operationTypeName;
 
     public Integer getBorrowId() {
         return borrowId;
@@ -102,4 +112,46 @@ public class Circulation {
     public void setOperationType(Integer operationType) {
         this.operationType = operationType;
     }
+
+	public String getStaffName() {
+		return staffName;
+	}
+
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
+	}
+
+	public String getReaderName() {
+		return readerName;
+	}
+
+	public void setReaderName(String readerName) {
+		this.readerName = readerName;
+	}
+
+	public String getBookName() {
+		return bookName;
+	}
+
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
+	public String getOperationTypeName() {
+		return operationTypeName;
+	}
+
+	public void setOperationTypeName(String operationTypeName) {
+		this.operationTypeName = operationTypeName;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
+    
+    
 }

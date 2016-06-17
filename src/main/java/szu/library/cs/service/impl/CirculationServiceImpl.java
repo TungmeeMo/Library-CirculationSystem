@@ -1,5 +1,7 @@
 package szu.library.cs.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import szu.library.cs.dao.CirculationMapper;
@@ -37,6 +39,11 @@ public class CirculationServiceImpl implements ICirculationService {
 
 	public int insertSelective(Circulation record) {
 		return dao.insertSelective(record);
+	}
+
+
+	public List getForReader(Integer readerId) {
+		return dao.getForReader(readerId);
 	}
 
 }

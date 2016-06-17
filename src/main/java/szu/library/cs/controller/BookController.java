@@ -111,6 +111,10 @@ public class BookController {
 		Map<String, Object> map = new HashMap<String, Object>();  
 		try{
 			Book book = service.selectByPrimaryKey(bookId);
+			if(book==null){
+				map.put("success", "false"); 
+				return map;
+			}
 			map.put("data", book);  
 			map.put("success", "true");  
 		}catch(Exception e){
