@@ -50,8 +50,12 @@
 		<table tableName="payment_t" domainObjectName="Payment" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> 
 		<table tableName="item_t" domainObjectName="Item" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> 
 		<table tableName="system_setting_t" domainObjectName="SystemSetting" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> 
-		<table tableName="user_setting_t" domainObjectName="UserSetting" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->  
-		<table tableName="circulation_detail_t" domainObjectName="circulationDetail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
+		<table tableName="user_setting_t" domainObjectName="UserSetting" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
+		<table tableName="circulation_detail_t" domainObjectName="circulationDetail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  --> 
+		
+		<table tableName="reader_circulation_t" domainObjectName="ReaderCirculation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
+		
+		
 		
     </context>    
 </generatorConfiguration>    
