@@ -175,6 +175,7 @@ function queryBookById(target){
 	        		  $('#readerRegisterDate2').html((new Date(data.data.readerRegisterDate)).Format("yyyy-MM-dd"));
 	        	  }
 	        	  $('#isBorrowedName').html(data.data.isBorrowedName);
+	        	  $('#isBookBorrowed').val(data.data.isBorrowed);
 	          }else{
 	        	  alert("找不到图书，请重新输入图书条形码！"); 
 	          }  
@@ -202,6 +203,17 @@ function borrowBook(target){
 		alert("请输入图书条形码.");
 		return;
 	}
+	
+	if($("#isBookBorrowed").val()=='1'){
+		alert("该图书已借出！");
+		return;
+	}
+	
+	if($('#readerName')==null || ''==$('#readerName').val()){
+		alert("请先输入读者信息！");
+		return;
+	}
+	
 	var cir = new circulation();
 	 var jsonStringRef = JSON.stringify(cir);  
 //	 alert(jsonStringRef);

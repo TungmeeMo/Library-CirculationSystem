@@ -18,4 +18,8 @@ public interface CirculationMapper {
     int updateByPrimaryKey(Circulation record);
     
     List getForReader(Integer readerId);
+    
+    Circulation getCirculationByBookId(String bookId);
+    
+    Circulation getCirculationForReturn(String bookId, Integer status);
 }

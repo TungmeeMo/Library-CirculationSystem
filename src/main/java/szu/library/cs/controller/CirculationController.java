@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -20,11 +21,13 @@ import com.alibaba.fastjson.JSONObject;
 import szu.library.cs.pojo.Book;
 import szu.library.cs.pojo.Circulation;
 import szu.library.cs.pojo.Reader;
+import szu.library.cs.pojo.ReaderCirculation;
 import szu.library.cs.pojo.ReaderType;
 import szu.library.cs.pojo.circulationDetail;
 import szu.library.cs.service.IBookService;
 import szu.library.cs.service.ICirculationDetailService;
 import szu.library.cs.service.ICirculationService;
+import szu.library.cs.service.IReaderCirculationService;
 import szu.library.cs.service.IReaderService;
 import szu.library.cs.service.IReaderTypeService;
 
@@ -46,6 +49,9 @@ public class CirculationController {
 	
 	@Resource
 	private IBookService bookService;
+	
+	@Resource
+	private IReaderCirculationService readerCirculationService;
 	
 	@RequestMapping(value = "/borrowBook", method = RequestMethod.POST)  
 	@ResponseBody 
@@ -81,6 +87,10 @@ public class CirculationController {
 				reader.setReaderBorrowbook(reader.getReaderBorrowbook()+1); //增加读者借书数
 				readerService.updateByPrimaryKeySelective(reader);//更新读者信息
 				
+				book.setIsBorrowed(1); //设置图书为已借出
+				bookService.updateByPrimaryKeySelective(book); //更新图书信息
+				
+				
 				//操作日志记录本次操作
 				circulationDetail detail = new circulationDetail(); 
 				detail.setBorrowId(borrowId);
@@ -90,17 +100,87 @@ public class CirculationController {
 				circulationDetailService.insert(detail);
 				
 				//减少图书剩余数(图书管理模块，流通暂时不实现)
-				
 				map.put("success", "true");
+			}else{
+				map.put("success", "false");
 			}
 			
 			
+		}else{
+			map.put("success", "false");
 		}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return map;
 	}
+	
+//	@RequestMapping(value = "/getCirculationByBookId", method = RequestMethod.POST)  
+//	@ResponseBody 
+//	public Map<String, Object> getCirculationByBookId(@RequestBody String bookId){
+//		Map<String, Object> map = new HashMap<String, Object>();  
+//		try{
+//			Circulation cir = service.getCirculationByBookId(Integer.parseInt(bookId));
+//		map.put("sucess", "true");
+//		还需要建立一个视图对应的实体类
+//		map.put("bookList", cir);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			map.put("sucess", "false");
+//		}
+//		return map;
+//	}
+	
+	@RequestMapping(value = "/returnBook", method = RequestMethod.GET)  
+	@ResponseBody 
+	public Map<String, Object> returnBook( String bookId){
+		Map<String, Object> map = new HashMap<String, Object>();  
+		try{
+			if("".equals(bookId) || null == bookId){
+				map.put("success", "false");
+				return map;
+			}
+			Circulation circulation = service.getCirculationForReturn(bookId,1); //status 1: 在借。表示书未还
+			if(null != circulation){
+			
+				//修改当前借阅记录
+				Calendar now = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String returnDate = sdf.format(now.getTime());
+				circulation.setReturnDate(sdf.parse(returnDate)); //设置还书日期
+				circulation.setOperationType(2);//设置操作类型：还书
+				circulation.setStatus(2);//设置状态:已还
+				service.updateByPrimaryKeySelective(circulation);
+				ReaderCirculation readercirculation = readerCirculationService.getByBorrowId(circulation.getBorrowId());
+				
+				//修改图书
+				Book book = bookService.selectByPrimaryKey(bookId);
+				book.setIsBorrowed(0); //设置当前图书的isBorrowed=0
+				bookService.updateByPrimaryKeySelective(book);
+				
+				//修改读者
+				int readerId = circulation.getReaderId();
+				Reader reader = readerService.selectByPrimaryKey(readerId);
+				reader.setReaderBorrowbook(reader.getReaderBorrowbook()-1);//设置读者已借图书数-1
+				readerService.updateByPrimaryKeySelective(reader);
+				
+				map.put("success", "true");
+				map.put("reader", reader);
+				map.put("readercirculation", readercirculation);
+				
+			}else{
+				map.put("success", "false");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			map.put("success", "false");
+		}
+		return map;
+	}
+	
+	
+	
 	
 	
 

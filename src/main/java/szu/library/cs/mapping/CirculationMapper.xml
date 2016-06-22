@@ -18,9 +18,8 @@
     continue_times, operation_type
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from circulation_t
+    select *
+    from reader_circulation_t
     where borrow_id = #{borrowId,jdbcType=INTEGER}
   </select>
   
@@ -28,6 +27,19 @@
     select *
     from reader_circulation_t
     where reader_id = #{readerId,jdbcType=INTEGER}
+  </select>
+  
+   <select id="getCirculationByBookId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from reader_circulation_t
+    where book_id = #{bookId,jdbcType=VARCHAR}
+  </select>
+  
+  
+   <select id="getCirculationForReturn" resultMap="BaseResultMap"  >
+    select *
+    from reader_circulation_t
+    where book_id = #{0} and status = #{1}
   </select>
   
   

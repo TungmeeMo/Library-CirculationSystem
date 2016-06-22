@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="szu.library.cs.dao.ReaderCirculationMapper" >
+  <resultMap id="BaseResultMap" type="szu.library.cs.pojo.ReaderCirculation" >
+    <result column="borrow_id" property="borrowId" jdbcType="INTEGER" />
+    <result column="staff_id" property="staffId" jdbcType="INTEGER" />
+    <result column="reader_id" property="readerId" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="VARCHAR" />
+    <result column="borrow_date" property="borrowDate" jdbcType="TIMESTAMP" />
+    <result column="return_date" property="returnDate" jdbcType="TIMESTAMP" />
+    <result column="expect_date" property="expectDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="continue_times" property="continueTimes" jdbcType="INTEGER" />
+    <result column="operation_type" property="operationType" jdbcType="INTEGER" />
+    <result column="readerName" property="readerName" jdbcType="VARCHAR" />
+    <result column="bookName" property="bookName" jdbcType="VARCHAR" />
+    <result column="staffName" property="staffName" jdbcType="VARCHAR" />
+    <result column="statusName" property="statusName" jdbcType="VARCHAR" />
+    <result column="operationTypeName" property="operationTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <select id="getByBorrowId" resultMap="BaseResultMap"  >
+    select *
+    from reader_circulation_t
+    where borrow_id = #{0} 
+  </select>
+  
+  <insert id="insert" parameterType="szu.library.cs.pojo.ReaderCirculation" >
+    insert into reader_circulation_t (borrow_id, staff_id, reader_id, 
+      book_id, borrow_date, return_date, 
+      expect_date, status, continue_times, 
+      operation_type, readerName, bookName, 
+      staffName, statusName, operationTypeName
+      )
+    values (#{borrowId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{readerId,jdbcType=INTEGER}, 
+      #{bookId,jdbcType=VARCHAR}, #{borrowDate,jdbcType=TIMESTAMP}, #{returnDate,jdbcType=TIMESTAMP}, 
+      #{expectDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{continueTimes,jdbcType=INTEGER}, 
+      #{operationType,jdbcType=INTEGER}, #{readerName,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, 
+      #{staffName,jdbcType=VARCHAR}, #{statusName,jdbcType=VARCHAR}, #{operationTypeName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="szu.library.cs.pojo.ReaderCirculation" >
+    insert into reader_circulation_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="borrowId != null" >
+        borrow_id,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="readerId != null" >
+        reader_id,
+      </if>
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="borrowDate != null" >
+        borrow_date,
+      </if>
+      <if test="returnDate != null" >
+        return_date,
+      </if>
+      <if test="expectDate != null" >
+        expect_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="continueTimes != null" >
+        continue_times,
+      </if>
+      <if test="operationType != null" >
+        operation_type,
+      </if>
+      <if test="readerName != null" >
+        readerName,
+      </if>
+      <if test="bookName != null" >
+        bookName,
+      </if>
+      <if test="staffName != null" >
+        staffName,
+      </if>
+      <if test="statusName != null" >
+        statusName,
+      </if>
+      <if test="operationTypeName != null" >
+        operationTypeName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="borrowId != null" >
+        #{borrowId,jdbcType=INTEGER},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="readerId != null" >
+        #{readerId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowDate != null" >
+        #{borrowDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnDate != null" >
+        #{returnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectDate != null" >
+        #{expectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="continueTimes != null" >
+        #{continueTimes,jdbcType=INTEGER},
+      </if>
+      <if test="operationType != null" >
+        #{operationType,jdbcType=INTEGER},
+      </if>
+      <if test="readerName != null" >
+        #{readerName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="statusName != null" >
+        #{statusName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTypeName != null" >
+        #{operationTypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

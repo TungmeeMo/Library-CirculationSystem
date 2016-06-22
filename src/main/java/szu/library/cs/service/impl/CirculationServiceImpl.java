@@ -46,4 +46,13 @@ public class CirculationServiceImpl implements ICirculationService {
 		return dao.getForReader(readerId);
 	}
 
+
+	public Circulation getCirculationByBookId(String bookId) {
+		return dao.getCirculationByBookId(bookId);
+	}
+	
+	public Circulation getCirculationForReturn(String bookId, Integer status){
+		return dao.getCirculationForReturn(bookId, status);
+	}
+
 }

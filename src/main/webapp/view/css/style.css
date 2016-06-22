@@ -250,3 +250,9 @@ body {
     overflow: hidden;
     border-collapse: collapse;
 }
+
+// return page
+.returnReaderInfo tr td{
+	margin-right: 5px;
+	
+}

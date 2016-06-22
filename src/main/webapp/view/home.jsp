@@ -158,7 +158,7 @@
                     	<div id="readerRegisterDate2"></div>
                     </td>
                     <td>
-                    	<div id="isBorrowedName" ></div>
+                    	<div id="isBorrowedName" ></div><input type="hidden" name="isBookBorrowed" id="isBookBorrowed" >
                     </td>
                 </tr>
             </table>
