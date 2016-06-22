@@ -17,43 +17,7 @@
 </head>
 
 <body>
-    <div class="header">
-        <h1>图书馆管理系统</h1>
-        <div id="menu">
-            <ul>
-                <li><a href="home.jsp">图书管理</a>
-                    <ul>
-                        <li><a href="home.jsp">借书管理</a></li>
-                        <li><a href="return.jsp">还书管理</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">账目管理</a>
-                </li>
-                <li><a href="#">读者信息管理</a>
-                    <ul>
-                        <li><a href="#">增加读者信息</a></li>
-                        <li><a href="#">修改读者信息</a></li>
-                        <li><a href="#">删除读者信息</a></li>
-                        <li><a href="#">查询读者信息</a></li>
-                        <li><a href="#">导出读者信息</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">预约管理</a>
-                </li>
-                <li><a href="#">参数设置</a>
-                    <ul>
-                        <li><a href="#">设置图书类型</a></li>
-                        <li><a href="#">设置流通权限</a></li>
-                        <li><a href="#">设置系统参数</a></li>
-                        <li><a href="#">设置用户参数</a></li>
-                        <li><a href="#">其他</a></li>
-                    </ul>
-                </li>
-                <li><a href="login.html">退出系统</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+ <%@include file="navigation.jsp"%>
     <div class="container">
         <h2>图书归还</h2>
         <hr width="140px" size="3" align="center" color="grey">
@@ -122,9 +86,7 @@
             </table>
         </div>
     </div>
-    <div class="footer">
-        <p>CopyRight © 2016 流通组全体人员 All Rights Reserved</p>
-    </div>
+      <%@include file="banner.jsp"%>
 </body>
 
 </html>
