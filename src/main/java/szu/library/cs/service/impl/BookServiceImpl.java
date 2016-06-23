@@ -54,5 +54,10 @@ public class BookServiceImpl implements IBookService {
 	public Book queryByBookId(String name){
 		return dao.queryByBookId(name);
 	}
+	
+	public List getLastest5() {
+		return dao.getLastest5();
+	}
+
 
 }

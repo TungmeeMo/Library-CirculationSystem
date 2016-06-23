@@ -3,7 +3,6 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <%Staff staff = (Staff)request.getSession().getAttribute("currUser");
  int staffId = staff.getStaffId();
-
 %>
 <html>
 
@@ -28,63 +27,79 @@
             <div class="bookHeader">
                 读者编号:
                 <input name="readerId" type="text" id="readerID">
-                <input name="button2" type="button" value="搜索">
+                <input name="button2" type="button" value="搜索" onclick="selectReaderById('${ctx}')">
     <a href="javascript:void(0)" onclick="document.getElementById('light2').style.display='block';document.getElementById('fade').style.display='block'">新增读者</a>
                 <div id="light1" class="white_content">
-                    读者编号:
-                    <input type="text" name="readerNumber">
                     <br/> 姓名:
-                    <input type="text" name="name">
+                    <input type="text" id="name">
                     <br/> 性别:
-                    <input type="radio" id="male" checked="checked" name="sex">
+                    <input type="radio" id="male1" checked="checked" name="sex" value="1">
                     <label for="male">男</label>
-                    <input type="radio" id="female" name="sex">
+                    <input type="radio" id="female1" name="sex" value="2"> 
                     <label for="female">女</label>
                     <br/> 读者类型:
-                    <input type="text" name="readerType">
+                    <select id="readerType1">
+                        <option value ="1">学生</option>
+                        <option value ="2">教师</option>
+                        <option value="3">外来人员</option>
+                    </select>
                     <br/> 读者地址:
-                    <input type="text" name="readerAddress">
+                    <input type="text" id="readerAddress">
                     <br/> 联系电话:
-                    <input type="text" name="readerTelephone">
+                    <input type="text" id="readerTelephone">
                     <br/> 登记日期:
-                    <input type="text" name="readerRegisterDate">
+                    <input type="text" id="readerRegisterDate" readonly>
                     <br/> 已借数量:
-                    <input type="text" name="readerBorrowbook">
+                    <input type="text" id="readerBorrowbook">
                     <br/> 读者状态:
-                    <input type="text" name="status">
+                    <select id="status1">
+                        <option value ="1">正常</option>
+                        <option value ="2">借满</option>
+                        <option value="3">超期</option>
+                        <option value="4">暂停</option>
+                        <option value="5">欠款</option>
+                        <option value="6">违约</option>
+                        <option value="7">挂失</option>
+                        <option value="8">退证</option>
+                        <option value="9">失效</option>
+                    </select>
                     <br/>
-                    <a href="#">保存</a>
+                    <a href="javascript:updateReader('${ctx}')" >保存</a>
                     <a href="javascript:void(0)" onclick="document.getElementById('light1').style.display='none';document.getElementById('fade').style.display='none'">关闭</a>
                 </div>
                 <div id="light2" class="white_content">
-                    读者编号:
-                    <input type="text" name="readerNumber">
                     <br/> 姓名:
-                    <input type="text" name="name">
+                    <input type="text" id="name">
                     <br/> 性别:
                     <input type="radio" id="male" checked="checked" name="sex">
                     <label for="male">男</label>
                     <input type="radio" id="female" name="sex">
                     <label for="female">女</label>
                     <br/> 读者类型:
-                    <input type="text" name="readerType">
+                    <select id="readerType">
+                        <option value ="1">学生</option>
+                        <option value ="2">教师</option>
+                        <option value="3">外来人员</option>
+                    </select>
                     <br/> 读者地址:
-                    <input type="text" name="readerAddress">
+                    <input type="text" id="readerAddress">
                     <br/> 联系电话:
-                    <input type="text" name="readerTelephone">
+                    <input type="text" id="readerTelephone">
+                    <!--
                     <br/> 登记日期:
                     <input type="text" name="readerRegisterDate">
                     <br/> 已借数量:
                     <input type="text" name="readerBorrowbook">
                     <br/> 读者状态:
-                    <input type="text" name="status">
+                    <input type="text" name="status">-->
                     <br/>
-                    <a href="#">保存</a>
+                    <!--<input name="button3" type="button" value="保存" onclick="addReader('${ctx}')">-->
+                    <a href="javascript:addReader('${ctx}')">保存</a>
                     <a href="javascript:void(0)" onclick="document.getElementById('light2').style.display='none';document.getElementById('fade').style.display='none'">关闭</a>
                 </div>
                 <div id="fade" class="black_overlay"></div>
             </div>
-            <table class="readerinfo">
+            <table class="readerinfo" id="table">
                 <tr>
                     <td>读者编号</td>
                     <td>姓名</td>
@@ -100,37 +115,37 @@
                 </tr>
                 <tr>
                     <td>
-                        <input name="readernumber" type="text" id="readerNumber">
+                        <input name="readernumber" type="text" id="readerNumber" readonly>
                     </td>
                     <td>
-                        <input name="name" type="text" id="name">
+                        <input name="name" type="text" id="name" readonly>
                     </td>
                     <td>
-                        <input name="readerGender" type="text" id="readerGender">
+                        <input name="readerGender" type="text" id="readerGender" readonly>
                     </td>
                     <td>
-                        <input name="readerType" type="text" id="readerType">
+                        <input name="readerType" type="text" id="readerType" readonly>
                     </td>
                     <td>
-                        <input name="readerAddress" type="text" id="readerAddress">
+                        <input name="readerAddress" type="text" id="readerAddress" readonly>
                     </td>
                     <td>
-                        <input name="readerTelephone" type="text" id="readerTelephone">
+                        <input name="readerTelephone" type="text" id="readerTelephone" readonly>
                     </td>
                     <td>
-                        <input name="readerRegisterDate" type="text" id="readerRegisterDate">
+                        <input name="readerRegisterDate" type="text" id="readerRegisterDate" readonly>
                     </td>
                     <td>
-                        <input name="readerBorrowbook" type="text" id="readerBorrowbook">
+                        <input name="readerBorrowbook" type="text" id="readerBorrowbook" readonly>
                     </td>
                     <td>
-                        <input name="status" type="text" id="status">
+                        <input name="status" type="text" id="status" readonly>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" onclick="document.getElementById('light2').style.display='block';document.getElementById('fade').style.display='block'">修改</a>
+                        <a href="javascript:updateOnclick()">修改</a>
                     </td>
                     <td>
-                        <a href="">删除</a>
+                        <a href="#" onclick="deleteReader('${ctx}')">删除</a>
                     </td>
                 </tr>
             </table>

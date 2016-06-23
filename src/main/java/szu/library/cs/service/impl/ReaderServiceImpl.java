@@ -1,6 +1,7 @@
 package szu.library.cs.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -51,6 +52,13 @@ public class ReaderServiceImpl implements IReaderService{
 	
 	public List queryByCriteria(Reader record){
 		return dao.queryByCriteria(record);
+	}
+
+
+	@Override
+	public int updateStatus(Map map) {
+		// TODO Auto-generated method stub
+		return dao.updateStatus(map);
 	}
 
 }

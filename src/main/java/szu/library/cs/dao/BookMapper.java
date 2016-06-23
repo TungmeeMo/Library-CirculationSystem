@@ -20,4 +20,6 @@ public interface BookMapper {
     List queryByCriteria(Book book);
     
     Book queryByBookId(String name);
+    
+    List  getLastest5();
 }

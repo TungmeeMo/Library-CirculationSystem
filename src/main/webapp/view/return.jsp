@@ -68,7 +68,7 @@
             <div class="bookHeader">
                  <h3>借阅信息</h3> 图书编号:
                 <input name="bookId" type="text" id="bookId">
-                <input name="button2" type="button" value="搜索" onclick="getBorrowInfo('${ctx}')">
+                <input name="button2" type="button" value="搜索" onclick="getBorrowInfoForReturn'${ctx}','readerReturnTab')">
                 <input name="button3" type="button" value="还书" onclick="returnBook('${ctx}','readerReturnTab')">
             </div>
             <hr width="959px" size="1" id="readerBookInfo">

@@ -1,6 +1,7 @@
 package szu.library.cs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import szu.library.cs.pojo.Reader;
 
@@ -20,4 +21,6 @@ public interface IReaderService {
     List queryByName(String name);
     
     List queryByCriteria(Reader record);
+    
+    int updateStatus(Map map);
 }

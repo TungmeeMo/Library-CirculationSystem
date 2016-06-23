@@ -1,6 +1,7 @@
 package szu.library.cs.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import szu.library.cs.pojo.Reader;
 
@@ -20,5 +21,7 @@ public interface ReaderMapper {
     List queryByName(String name);
     
     List queryByCriteria(Reader record);
+
+	int updateStatus(Map map);
     
 }

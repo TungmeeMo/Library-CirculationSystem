@@ -1,6 +1,8 @@
 package szu.library.cs.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,10 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import szu.library.cs.pojo.BookType;
+import szu.library.cs.pojo.Circulation;
 import szu.library.cs.pojo.StaffAuthority;
 import szu.library.cs.service.IStaffAuthorityService;
 
@@ -30,63 +36,78 @@ public class StaffAuthorityController {
 		return "/staff/newStaffAuthority"; 
 	}
 	
-	@RequestMapping("/staffAuthority/new")
-	public String newAuthority(StaffAuthority authority,ModelMap model){
+	
+	@RequestMapping(value = "/staffAuthority/new", method = RequestMethod.POST)  
+	@ResponseBody 
+	public  Map<String, Object> newAuthority(@RequestBody StaffAuthority authority,ModelMap model){
+		Map<String, Object> map = new HashMap<String, Object>();  
 		
 		try{
 			String name = authority.getAuthorityName();
 			if(null ==service.queryByName(name)){
 				service.insert(authority);
-				model.put("message", "新增成功！");
+				map.put("success", "true");
+				map.put("message", "新增成功！");
 			}else{
-				model.put("message", "新增失败，权限名称已存在！");
+				map.put("success", "false");
+				map.put("message", "新增失败，权限名称已存在！");
 			}
 		}catch(Exception e){
-			model.put("message", "新增失败，请重试！");
+			map.put("success", "false");
+			map.put("message", "新增失败，请重试！");
 		}
-		return "home";
+		return map;
 	}
 	
-	@RequestMapping("/staffAuthority/toShowlist")
-	public String listAll(ModelMap model){
-		
+	@RequestMapping(value = "/staffAuthority/toShowlist", method = RequestMethod.GET)  
+	@ResponseBody  
+	public Map<String, Object> listAll(ModelMap model){
+		Map<String, Object> map = new HashMap<String, Object>(); 
 		try{
 			List<StaffAuthority> list = service.getAll();
-			model.put("list", list);
+			map.put("success", "true");  
+			map.put("list", list);
 		}catch(Exception e){
+			map.put("success", "false");  
 		}
-		return "/staff/listAuthority";
+		return map;
 	}
 	
-	@RequestMapping("/staffAuthority/toEdit")
-	public String toEdit(HttpServletRequest request,ModelMap model){
-		String authorityId = request.getParameter("id"); 
-		StaffAuthority authority = service.selectByPrimaryKey(Integer.parseInt(authorityId));
-		model.put("authority", authority);
-		return "/staff/editStaffAuthority";
-	}
 	
-	@RequestMapping("/staffAuthority/update")
-	public String update(StaffAuthority authority,ModelMap model){
+	@RequestMapping(value = "/staffAuthority/update", method = RequestMethod.POST)  
+	@ResponseBody 
+	public Map<String, Object> update(@RequestBody StaffAuthority authority,ModelMap model){
+		Map<String, Object> map = new HashMap<String, Object>();  
 		try{
-			service.updateByPrimaryKey(authority);
-			model.put("message", "更新成功！");
+			String name = authority.getAuthorityName();
+			if(null ==service.queryByName(name)){
+				service.updateByPrimaryKey(authority);
+				map.put("success", "true");
+				map.put("message", "更新成功！");
+			}else{
+				map.put("success", "false");
+				map.put("message", "更新失败，权限名称已存在！");
+			}
 		}catch(Exception e){
-			model.put("message", "更新失败，请重试！");
+			map.put("success", "false");  
+			map.put("message", "更新失败，请重试！");
 		}
-		return listAll(model);
+		return map;
 	}
 	
-	@RequestMapping("/staffAuthority/delete")
-	public String delete(HttpServletRequest request,ModelMap model){
-		String authorityId = request.getParameter("id"); 
+	@RequestMapping(value = "/staffAuthority/delete", method = RequestMethod.GET)  
+	@ResponseBody 
+	public Map<String, Object> delete(String authorityId,ModelMap model){
+		Map<String, Object> map = new HashMap<String, Object>();  
 		try{
 			service.deleteByPrimaryKey(Integer.parseInt(authorityId));
-			model.put("message", "删除成功！");
+			map.put("success", "true");
+			map.put("message", "删除成功！");
 		}catch(Exception e){
-			model.put("message", "删除失败，请重试！");
+			map.put("success", "false");
+			map.put("message", "删除失败！");
 		}
-		return listAll(model);
+		return map;
 	}
 	
 	@RequestMapping("/staffAuthority/queryByName")

@@ -93,15 +93,15 @@ function queryReaderById(target,readerBorrowTab){
 	        success : function(data) { 
 	        	
 	          if (data && data.success == "true") {
-	        	  $('#readerName').val(data.data.readerName);
-	        	  $('#readerGenderName').val(data.data.readerGenderName);
-	        	  $('#readerTypeName').val(data.data.readerTypeName);
-	        	  $('#readerAddress').val(data.data.readerAddress);
+	        	  $('#readerName').html(data.data.readerName);
+	        	  $('#readerGenderName').html(data.data.readerGenderName);
+	        	  $('#readerTypeName').html(data.data.readerTypeName);
+	        	  $('#readerAddress').html(data.data.readerAddress);
 	        	  
-	        	  $('#readerTelephone').val(data.data.readerTelephone);
-	        	  $('#readerRegisterDate').val(data.data.readerRegisterDate);
-	        	  $('#readerBorrowbook').val(data.data.readerBorrowbook);
-	        	  $('#statusName').val(data.data.statusName);
+	        	  $('#readerTelephone').html(data.data.readerTelephone);
+	        	  $('#readerRegisterDate').html(data.data.readerRegisterDate);
+	        	  $('#readerBorrowbook').html(data.data.readerBorrowbook);
+	        	  $('#statusName').html(data.data.statusName);
 	        	  
 	        	  var cit= $("#"+readerBorrowTab);
 	              if(cit.size()>0) {
@@ -209,7 +209,7 @@ function borrowBook(target){
 		return;
 	}
 	
-	if($('#readerName')==null || ''==$('#readerName').val()){
+	if($('#readerId')==null || ''==$('#readerId').val()){
 		alert("请先输入读者信息！");
 		return;
 	}
@@ -236,4 +236,301 @@ function borrowBook(target){
 	          alert("借书失败，请重试！")  
 	        }  
 	      });
+}
+
+function getLastest5(target,bookInfoTab){
+    jQuery.ajax( {  
+	        type : 'GET',  
+	        contentType : 'application/json; charset=utf-8',  
+	        url : target+'/circulation/getLastest5', 
+	        dataType : 'json',  
+	        success : function(data) { 
+	        	
+	          if (data && data.success == "true") {
+	        	//清空图书信息表格
+	        	  var cit= $("#"+bookInfoTab);
+	              if(cit.size()>0) {
+	                  cit.find("tr:not(:first)").remove();
+	              }
+	        	  
+	        	  var item = data.list;
+	        	  var rborrowDate="";
+	            	var rreturnDate="";
+	            	var rexpectDate="";
+	            	if(item.borrowDate){
+	            		rborrowDate = (new Date(item.borrowDate)).Format("yyyy-MM-dd");
+		        	  }
+	            	if(item.returnDate){
+	            		rreturnDate=(new Date(item.returnDate)).Format("yyyy-MM-dd");
+		        	  }
+	            	if(item.expectDate){
+	            		rexpectDate = (new Date(item.expectDate)).Format("yyyy-MM-dd");
+		        	  }
+	            	var tr = "<tr><td>"+item.bookId+"</td><td>"+item.bookName+
+	            	"</td><td>"+item.typeName+"</td>";
+//	            	alert(tr);
+	            	addTr(bookInfoTab,-1,tr);
+	        	 
+	          }else{
+	        	  alert("找不到图书，请重新输入图书条形码！"); 
+	          }  
+	        },  
+	        error : function() {  
+	          alert("查询失败，请重试！");
+	        }  
+	      });
+}
+
+
+
+function selectReaderById(target){
+	var selectId = $("#readerID").val();
+	if(selectId.trim() == ""){
+		alert("请输入要查询的读者ID");
+		return ;
+	}
+
+	var params = $.toJSON({"readerId" : selectId});
+	var result = {};
+
+	jQuery.ajax({  
+	        type : 'POST',  
+	        contentType : 'application/json; charset=utf-8',  
+	        url : target+'/reader/selectById',
+	        dataType : 'json',
+	        async:false,  
+	        cache:false,  
+	        data:params ,
+	        success : function(data) { 
+						if(data.readerId){
+	        		$('#table #readerNumber').val(data.readerId);
+	          	$('#table #name').val(data.readerName);
+	      	  	$('#table #readerGender').val(data.readerGenderName);
+	      	  	$('#table #readerType').val(data.readerTypeName);
+							$('#table #readerAddress').val(data.readerAddress);
+							$('#table #readerTelephone').val(data.readerTelephone);
+							$('#table #readerRegisterDate').val((new Date(data.readerRegisterDate)).Format("yyyy-MM-dd"));
+							$('#table #readerBorrowbook').val(data.readerBorrowbook);
+							$('#table #status').val(data.statusName);
+						} else{
+							alert("读者信息不存在！");
+							return;
+						}
+				},  
+	        error : function() {  
+	          alert("数据库异常！");
+						return;  
+	        }  
+	      });
+}
+
+///////////////////////////////////读者信息管理//////////////////////////////////////////////////
+function addReader(target){
+	var readerId = $('#light2 #readerNumber').val();
+	var readerName = $('#light2 #name').val();
+	var readerGenderName = $('#light2 input[name="sex"]:checked').val() ? "1" : "2";
+	var readerType = $('#light2 #readerType').val();
+	var readerAddress = $('#light2 #readerAddress').val();
+	var readerTelephone = $('#light2 #readerTelephone').val();
+
+	if(typeof(readerName) == "undefined" || readerName.trim() == ""){
+		alert("请输入读者姓名");
+		return;
+	}
+	if(typeof(readerGenderName) == "undefined" || readerGenderName.trim() == ""){
+		alert("请选择读者性别");
+		return;
+	}
+	if(typeof(readerType) == "undefined" || readerType.trim() == ""){
+		alert("请选择读者类型");
+		return;
+	}
+	if(typeof(readerAddress) == "undefined" || readerAddress.trim() == ""){
+		alert("请输入读者地址");
+		return;
+	}
+	if(typeof(readerTelephone) == "undefined" || readerTelephone.trim() == ""){
+		alert("请输入读者联系电话");
+		return;
+	}
+
+	var params = $.toJSON({"readerId":readerId, "readerName":readerName, "readerGenderName":readerGenderName, 
+												 "readerType":readerType, "readerAddress":readerAddress, "readerTelephone":readerTelephone});
+
+	jQuery.ajax({  
+	        type : 'POST',  
+	        contentType : 'application/json; charset=utf-8',  
+	        url : target+'/reader/insert',
+	        dataType : 'json',
+	        async:false,  
+	        cache:false,  
+	        data:params ,
+	        success : function(data) { 
+						if(data > 0){
+							alert("插入成功！");
+							$('#light2 #readerNumber').val("");
+							$('#light2 #name').val("");
+							$('#light2 #male').val(true);
+							$('#light2 #readerType').val("");
+							$('#light2 #readerAddress').val("");
+							$('#light2 #readerTelephone').val("");
+						} else{
+							alert("插入失败！");
+							return;
+						}
+				},  
+	        error : function() {  
+	          alert("数据库异常！");
+						return;  
+	        }  
+	      });
+
+}
+
+function deleteReader(target){
+	var readerId = $('#table #readerNumber').val();
+	var status = $('#table #status').val();
+	if(typeof(readerId) == "undefined" || readerId.trim() == "") return;
+	if(status == "失效") {
+		alert("已失效读者不能删除！");
+		return;
+	}
+	var params = $.toJSON({"readerId" : readerId});
+
+	jQuery.ajax({  
+	        type : 'POST',  
+	        contentType : 'application/json; charset=utf-8',  
+	        url : target+'/reader/delete',
+	        dataType : 'json',
+	        async:false,  
+	        cache:false,  
+	        data:params ,
+	        success : function(data) { 
+						if(data > 0){
+	        		$('#table #readerNumber').val("");
+	          	$('#table #name').val("");
+	      	  	$('#table #readerGender').val("");
+	      	  	$('#table #readerType').val("");
+							$('#table #readerAddress').val("");
+							$('#table #readerTelephone').val("");
+							$('#table #readerRegisterDate').val("");
+							$('#table #readerBorrowbook').val("");
+							$('#table #status').val("");
+						} else{
+							alert("删除失败！");
+							return;
+						}
+				},  
+	        error : function() {  
+	          alert("数据库异常！");
+						return;  
+	        }  
+	      });
+}
+
+function updateReader(target){
+	var readerId = $('#light1 #readerNumber').val();
+	var readerName = $('#light1 #name').val();
+	var readerGenderName = $('#light1 input[name="sex"]:checked').val();
+	var readerType = $('#light1 #readerType1').val();
+	var readerAddress = $('#light1 #readerAddress').val();
+	var readerTelephone = $('#light1 #readerTelephone').val();
+	var readerRegisterDate = $('#light1 #readerRegisterDate').val();
+	var readerBorrowbook = $('#light1 #readerBorrowbook').val();
+	var status = $('#light1 #status1').val();
+
+	if(typeof(readerName) == "undefined" || readerName.trim() == ""){
+		alert("请输入读者姓名");
+		return;
+	}
+	if(typeof(readerGenderName) == "undefined" || readerGenderName.trim() == ""){
+		alert("请选择读者性别");
+		return;
+	}
+	if(typeof(readerType) == "undefined" || readerType.trim() == ""){
+		alert("请选择读者类型");
+		return;
+	}
+	if(typeof(readerAddress) == "undefined" || readerAddress.trim() == ""){
+		alert("请输入读者地址");
+		return;
+	}
+	if(typeof(readerTelephone) == "undefined" || readerTelephone.trim() == ""){
+		alert("请输入读者联系电话");
+		return;
+	}
+	if(typeof(readerBorrowbook) == "undefined" || readerBorrowbook.trim() == ""){
+		alert("请输入读者借书数量");
+		return;
+	}
+	if(typeof(status) == "undefined" || status.trim() == ""){
+		alert("请选择读者状态");
+		return;
+	}
+
+	var params = $.toJSON({"readerId":readerId, "readerName":readerName, "readerGenderName":readerGenderName, 
+												 "readerType":readerType, "readerAddress":readerAddress, "readerTelephone":readerTelephone,
+												 "readerBorrowbook":readerBorrowbook, "status":status, "readerRegisterDate":readerRegisterDate});
+
+jQuery.ajax({  
+	        type : 'POST',  
+	        contentType : 'application/json; charset=utf-8',  
+	        url : target+'/reader/update',
+	        dataType : 'json',
+	        async:false,  
+	        cache:false,  
+	        data:params ,
+	        success : function(data) { 
+						if(data > 0){
+							alert("更新成功！");
+							$('#table #readerNumber').val(readerId);
+	          	$('#table #name').val(readerName);
+	      	  	$('#table #readerGender').val(readerGenderName == 1 ? "男" : "女");
+	      	  	$('#table #readerType').val($('#light1 #readerType1 option:selected').text());
+							$('#table #readerAddress').val(readerAddress);
+							$('#table #readerTelephone').val(readerTelephone);
+							$('#table #readerRegisterDate').val(readerRegisterDate);
+							$('#table #readerBorrowbook').val(readerBorrowbook);
+							$('#table #status').val($('#light1 #status1 option:selected').text());
+						} else{
+							alert("更新失败！");
+							return;
+						}
+				},  
+	        error : function() {  
+	          alert("数据库异常！");
+						return;  
+	        }  
+	      });
+	
+
+}
+
+function updateOnclick(){					
+	$('#light1 #readerNumber').val($('#table #readerNumber').val());
+	$('#light1 #name').val($('#table #name').val());
+	if($('#table #readerGender').val() == "男" ? true : false) document.getElementById("male1").checked = "checked";
+	else document.getElementById("female1").checked = "checked";
+	var readerType = $('#table #readerType').val();
+	var select1 = document.getElementById('readerType1');
+	for(var i=0; i<select1.options.length; i++){  
+        if(select1.options[i].innerHTML == readerType){  
+            select1.options[i].selected = true;  
+            break; 
+        }  
+    }  
+	$('#light1 #readerAddress').val($('#table #readerAddress').val());
+	$('#light1 #readerTelephone').val($('#table #readerTelephone').val());
+	$('#light1 #readerRegisterDate').val($('#table #readerRegisterDate').val());
+	$('#light1 #readerBorrowbook').val($('#table #readerBorrowbook').val());
+	var status = $('#table #status').val();
+	var select = document.getElementById('status1');  
+    for(var i=0; i<select.options.length; i++){  
+        if(select.options[i].innerHTML == status){  
+            select.options[i].selected = true;  
+            break;  
+        }  
+    }  
+	document.getElementById('light1').style.display='block';
+	document.getElementById('fade').style.display='block';
 }

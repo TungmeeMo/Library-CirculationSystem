@@ -1,5 +1,7 @@
 package szu.library.cs.dao;
 
+import java.util.List;
+
 import szu.library.cs.pojo.ReaderCirculation;
 
 public interface ReaderCirculationMapper {
@@ -8,4 +10,6 @@ public interface ReaderCirculationMapper {
     int insertSelective(ReaderCirculation record);
     
     ReaderCirculation getByBorrowId(Integer borrowId);
+    
+    
 }

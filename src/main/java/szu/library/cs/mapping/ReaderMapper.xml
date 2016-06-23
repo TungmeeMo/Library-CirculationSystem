@@ -132,6 +132,11 @@ where reader_t.reader_id=  #{readerId,jdbcType=INTEGER}
       </if>
     </trim>
   </insert>
+  <update id="updateStatus" parameterType="java.util.HashMap" >
+  	update reader_t
+  	set status = #{status,jdbcType=INTEGER}
+  	where reader_id = #{readerId,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="szu.library.cs.pojo.Reader" >
     update reader_t
     <set >

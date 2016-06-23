@@ -21,6 +21,14 @@
     where book_id = #{bookId,jdbcType=VARCHAR}
   </select>
   
+     <select id="getLastest5" resultMap="BaseResultMap"  >
+    SELECT book_t.* ,book_type_t.type_name as typeName
+	from  reader_circulation_t LEFT JOIN book_t on book_t.book_id=reader_circulation_t.book_id LEFT JOIN book_type_t on book_type_t.type_id=book_t.type_id
+	GROUP BY reader_circulation_t.book_id
+	ORDER BY  reader_circulation_t.borrow_date
+	LIMIT 5
+  </select>
+  
    <select id="queryByBookId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select *,CASE is_borrowed WHEN '1' THEN '已借出' ELSE '未借出' END as isBorrowedName,book_type_t.type_name as typeName
     from book_t LEFT JOIN book_type_t on book_type_t.type_id=book_t.type_id

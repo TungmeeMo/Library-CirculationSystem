@@ -17,8 +17,7 @@
                 </li>
                 <li><a href="#">参数设置</a>
                     <ul>
-                        <li><a href="#">设置流通权限</a></li>
-                        <li><a href="#">其他</a></li>
+                        <li><a href="${ctx}/view/authority.jsp">设置流通权限</a></li>
                     </ul>
                 </li>
                 <li><a href="${ctx}/view/login.jsp">退出系统</a>

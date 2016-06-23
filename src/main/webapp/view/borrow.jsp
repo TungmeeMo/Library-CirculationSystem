@@ -37,32 +37,32 @@
             <table class="readerinfo">
                 <tr>
                     <td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:
-                        <input name="name" type="text" id="readerName">
+                         <span id="readerName"></span>
                     </td>
                     <td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:
-                        <input name="readerGenderName" type="text" id="readerGenderName">
+                        <span id="readerGenderName"></span>
                     </td>
                     <td>读者类型:
-                        <input name="readerTypeName" type="text" id="readerTypeName">
+                        <span id="readerTypeName"></span>
                     </td>
                 </tr>
                 <tr>
                     <td>读者地址:
-                        <input name="readerAddress" type="text" id="readerAddress">
+                        <span id="readerAddress"></span>
                     </td>
                     <td>联系电话:
-                        <input name="readerTelephone" type="text" id="readerTelephone">
+                        <span id="readerTelephone"></span>
                     </td>
                     <td>登记日期:
-                        <input name="readerRegisterDate" type="text" id="readerRegisterDate">
+                        <span id="readerRegisterDate"></span>
                     </td>
                 </tr>
                 <tr>
                     <td>已借数量:
-                        <input name="readerBorrowbook" type="text" id="readerBorrowbook">
+                        <span id="readerBorrowbook"></span>
                     </td>
                     <td>读者状态:
-                        <input name="statusName" type="text" id="statusName">
+                        <span id="statusName"></span>
                     </td>
                 </tr>
             </table>

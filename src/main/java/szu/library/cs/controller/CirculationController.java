@@ -180,7 +180,58 @@ public class CirculationController {
 	}
 	
 	
+	@RequestMapping(value = "/getBorrowInfoForReturn", method = RequestMethod.GET)  
+	@ResponseBody 
+	public Map<String, Object> getBorrowInfoForReturn( String bookId){
+		Map<String, Object> map = new HashMap<String, Object>();  
+		try{
+			if("".equals(bookId) || null == bookId){
+				map.put("success", "false");
+				return map;
+			}
+			Circulation circulation = service.getCirculationForReturn(bookId,1); //status 1: 在借。表示书未还
+			if(null != circulation){
+			
+				ReaderCirculation readercirculation = readerCirculationService.getByBorrowId(circulation.getBorrowId());
+				
+				//读者信息
+				int readerId = circulation.getReaderId();
+				Reader reader = readerService.selectByPrimaryKey(readerId);
+				
+				map.put("success", "true");
+				map.put("reader", reader);
+				map.put("readercirculation", readercirculation);
+				
+			}else{
+				map.put("success", "false");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			map.put("success", "false");
+		}
+		return map;
+	}
 	
+	
+	@RequestMapping(value = "/getLastest5", method = RequestMethod.GET)  
+	@ResponseBody 
+	public Map getLastest5(ModelMap model){
+		Map<String, Object> map = new HashMap<String, Object>();  
+		try{
+			List<Book> list = bookService.getLastest5();
+			if(list==null){
+				map.put("success", "false"); 
+				return map;
+			}
+			map.put("list", list);  
+			map.put("success", "true");  
+		}catch(Exception e){
+			e.printStackTrace();
+			map.put("success", "false");  
+		}
+		return map;
+	}
 	
 	
 

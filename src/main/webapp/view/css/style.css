@@ -240,6 +240,22 @@ body {
     margin-right: 6px;
 }
 
+.container #addAuthority {
+    position: relative;
+    margin-left: 42%;
+}
+.container .book .authorityinfo input {
+    width: 150px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.container .book .authorityinfo a {
+    width: 75px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
 .container .bookHeader input[name="bookId"] {
     margin-left: 10px;
     width: 150px;
@@ -278,15 +294,17 @@ body {
     filter: alpha(opacity=88);
 }
 
+
 .white_content {
     display: none;
     position: absolute;
-    top: 10%;
-    left: 35%;
-    width: 30%;
-    height: 60%;
+    text-align:center;
+    top: 20%;
+    left: 40%;
+    width: 20%;
+    height: 30%;
     padding: 20px;
-    border: 2px solid #8fbf93;
+    border: 2px solid #00A5EC;
     background-color: white;
     z-index: 1002;
     overflow: auto;
@@ -298,17 +316,29 @@ body {
 }
 
 
+.container .bookHeader #light1 a{
+    border: 1px solid #000;
+    padding: 5px 10px;
+}
+
+.container .bookHeader #light2 a{
+    border: 1px solid #000;
+    padding: 5px 10px;
+}
+
+
+
 /*footer*/
 
 .footer {
     width: 960px;
-    height: 50px;
-    background-color: #DFDFDF;
+    height: 100px;
+    background-color: #F7F7F7;
     margin: 0 auto;
 }
 
 .footer p {
-    padding-top: 10px;
+    padding-top: 40px;
     text-align: center;
 }
 
@@ -317,5 +347,13 @@ body {
 .returnReaderInfo tr td{
 	margin-right: 5px;
 	
+}
+
+#returnReaderInfo tr td,.readerinfo tr td{
+	width: 350px;
+}
+
+.book #readerReturnTab,.book #showBookInfo{
+	width: 900px;
 }
 

@@ -20,5 +20,7 @@ public interface IBookService {
     List queryByCriteria(Book book);
     
     Book queryByBookId(String name);
+    
+    List getLastest5();
 
 }
